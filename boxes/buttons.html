@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My App</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            height: 25%;
+            background-color: #ccc;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40%;
+            height: 70%;
+            background-color: #fff;
+            border-radius: 5px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .output-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            height: 50%;
+            background-color: #eee;
+            margin-top: 25%;
+        }
+
+        .output {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            height: 40%;
+            background-color: #f2f2f2;
+            /* Add this line */
+            border-radius: 5px;
+            font-size: 20px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            /* Add this line */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="button-container">
+        <div id="button1" class="button">Button 1</div>
+        <div id="button2" class="button">Button 2</div>
+    </div>
+
+    <div class="output-container">
+        <div id="output1" class="output"></div>
+        <div id="output2" class="output"></div>
+    </div>
+
+    <script>
+        var button1 = document.getElementById( "button1" );
+        var button2 = document.getElementById( "button2" );
+        var output1 = document.getElementById( "output1" );
+        var output2 = document.getElementById( "output2" );
+
+        button1.onclick = function () {
+            output1.innerHTML = "You clicked Button 1!";
+            console.log( "clicked button 1!" );
+            setTimeout( function () {
+                output1.innerHTML = "";
+            }, 1000 );
+        }
+
+        button2.onclick = function () {
+            output2.innerHTML = "You clicked Button 2!";
+            setTimeout( function () {
+                output2.innerHTML = "";
+            }, 1000 );
+        }
+    </script>
+</body>
+</html>

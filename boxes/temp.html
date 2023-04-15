@@ -1,0 +1,79 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js interface</title>
+</head>
+<body>
+    To create a Javascript interface object that can communicate with Swift, you will need to use WKWebView’s JavaScript Interface feature. 
+    This feature allows you to create a “bridge” between your JavaScript code and Swift.
+
+    In your ViewController.swift class, you will need to add a new property for the Javascript bridge, for example:
+
+    swift<br>private var javascriptBridge: WKUserContentController!<br>
+
+
+    Then in your viewDidLoad function, you can add some initialization for the bridge.<br>
+
+    swift<br>javascriptBridge = WKUserContentController()<br>webView.configuration.userContentController = javascriptBridge<br>
+
+    Now to add a method from JavaScript to Swift, you will use the addScriptMessageHandler method of the WKUserContentController object.<br> 
+    This takes two parameters, one is the name of the message that you want to send from JavaScript, and the other is an object which adopts<br>
+     the WKScriptMessageHandler protocol, which contains your handler code.
+
+    For example, if you wanted to call a method called “showAlert” from JavaScript with a parameter called “message” which you<br>
+    would use to set the text in an alert, you could do something like this:
+    <br><br>
+    swift<br>javascriptBridge.addScriptMessageHandler(self, name: "showAlert")<br>
+    <br><br>
+    And your handler code in ViewController.swift would look something like this:
+
+    swift<br>To create a Javascript interface object that can communicate with Swift, you will need to use WKWebView’s JavaScript Interface feature. 
+    <br>This feature allows you to create a “bridge” between your JavaScript code and Swift.
+
+In your ViewController.swift class, you will need to add a new property for the Javascript bridge, for example:
+
+swift<br>
+<br>private var javascriptBridge: WKUserContentController!<br>
+<br>
+
+Then in your viewDidLoad function, you can add some initialization for the bridge.
+
+swift<br>
+<br><br>javascriptBridge = WKUserContentController()<br>webView.configuration.userContentController = javascriptBridge<br>
+<br>
+Now to add a method from JavaScript to Swift, you will use the addScriptMessageHandler method of the WKUserContentController object. <br>
+This takes two parameters, one is the name of the message that you want to send from JavaScript, and the other is an object which adopts <br>
+the WKScriptMessageHandler protocol, which contains your handler code.
+
+For example, if you wanted to call a method called “showAlert” from JavaScript with a parameter called “message” which you would use to set the text in an alert, you could do something like this:
+
+swift<br>javascriptBridge.addScriptMessageHandler(self, name: "showAlert")<br>
+
+And your handler code in ViewController.swift would look something like this:
+
+swift<br>
+<br>
+func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {<br> 
+    if message.name == "showAlert" {<br> if let message = message.body as? String {<br> 
+        let alertController = UIAlertController(title: "Alert from JavaScript!",<br> 
+        message: message,<br> 
+        preferredStyle: .alert)<br> 
+        alertController.addAction(UIAlertAction(title: "OK", style: .default))<br> 
+        self.present(alertController, animated: true)<br> }<br> }<br>}<br>
+<br><br>
+Now you can call this showAlert method from your JavaScript code:
+
+javascript<br>
+<br>
+window.webkit.messageHandlers.showAlert.postMessage("Hello from JavaScript!");<br>
+<br>
+
+You can repeat this process to create additional methods and messages that can be sent between JavaScript and <br><br>
+</body>
+</html>
+
