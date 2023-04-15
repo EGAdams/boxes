@@ -1,10 +1,8 @@
 //
 //  RequestParser.swift
-//  boxes
 //
 //  Created by Clay Ackerland on 4/15/23.
 //
-
 import Foundation
 
 class RequestParser {
@@ -21,10 +19,8 @@ class RequestParser {
                 print("Template root: \(params[1])")
             case "onMcbaReady":
                 McbaConfiguration.sharedInstance().setMcbaReady(ready: true)
-                if let callback = javascriptInterface.mcbaReadyCallback {
-                    callback()
-                }
-                let jsExecutor = JavaScriptExecutor(webView: javascriptInterface.webView)
+                if let callback = javascriptInterface.mcbaReadyCallback { callback()}
+                let jsExecutor = JavaScriptExecutor(webView: javascriptInterface.webView )
                 jsExecutor.runJs("MCBA.load();")
             case "exit":
                 print("exiting...")
@@ -32,7 +28,5 @@ class RequestParser {
                 print("MCBA log: \(params[1])")
             default:
                 break
-            }
-        }
-    }
+            }}}
 }

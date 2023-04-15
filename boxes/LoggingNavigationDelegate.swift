@@ -1,6 +1,5 @@
 //
 //  LoggingNavigationDelegate.swift
-//  boxes
 //
 //  Created by Clay Ackerland on 4/14/23.
 //
@@ -16,12 +15,10 @@ class LoggingNavigationDelegate: NSObject, WKNavigationDelegate {
             decisionHandler(.cancel)
             return
         }
-        decisionHandler(.allow)
-    }
+        decisionHandler( .allow )}
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         if let jsFilePath = Bundle.main.path(forResource: "init", ofType: "js"), let jsString = try? String(contentsOfFile: jsFilePath) {
             webView.evaluateJavaScript(jsString, completionHandler: nil)
-        }
-    }
+        }}
 }

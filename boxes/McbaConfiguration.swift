@@ -1,10 +1,9 @@
 //
 //  McbaConfiguration.swift
-//  boxes
 //
 //  Created by Clay Ackerland on 4/15/23.
 //
-//  Created by Clay Ackerland on 11/23/16.
+//  Originally Created by Clay Ackerland on 11/23/16.
 //  Copyright © 2016 All Web n Mobile. All rights reserved.
 //
 

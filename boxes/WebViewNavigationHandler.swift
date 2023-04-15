@@ -11,15 +11,15 @@ import WebKit
 
 class WebViewNavigationHandler {
     func handleNavigation(for request: URLRequest) -> Bool {
-        let mainInstance = McbaConfiguration.sharedInstance()
-        let mLibraryBundle = Bundle(identifier: "awm.ios.mcba.mLibrary")
-        let mainStoryBoard = UIStoryboard(name: "mcbaStoryboard", bundle: mLibraryBundle)
+        // let mainInstance = McbaConfiguration.sharedInstance()
+        // let mLibraryBundle = Bundle(identifier: "awm.ios.mcba.mLibrary")
+        // let mainStoryBoard = UIStoryboard(name: "mcbaStoryboard", bundle: mLibraryBundle)
 
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
             while let presentedViewController = topController.presentedViewController {
                 topController = presentedViewController
             }
-            let requestString = request.url?.absoluteString
+            // let requestString = request.url?.absoluteString
 
             // The same conditions from the original code
 

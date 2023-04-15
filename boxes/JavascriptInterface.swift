@@ -18,38 +18,29 @@ class JavaScriptInterface: NSObject, WKScriptMessageHandler {
     var webViewNavigationHandler: WebViewNavigationHandler
     weak var delegate: JavaScriptInterfaceDelegate?
 
-    init(webView: WKWebView) {
+    init( webView: WKWebView ) {
         self.webView = webView
         pushNotificationRegisterer = PushNotificationRegisterer(webView: webView)
         requestParser = RequestParser()
         webViewNavigationHandler = WebViewNavigationHandler()
 
         super.init()
-        let jsExecutor = JavaScriptExecutor(webView: webView)
+        let jsExecutor = JavaScriptExecutor( webView: webView )
         jsExecutor.bindDeviceFunctions()
 
         if !McbaConfiguration.sharedInstance().isJavascriptInitialized() {
-            McbaConfiguration.sharedInstance().javascriptInitialized = true
-        }
-    }
+            McbaConfiguration.sharedInstance().javascriptInitialized = true }}
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if message.name == "MCBA" {
             guard let urlString = message.body as? String,
-                  let url = URL(string: urlString) else {
-                return
-            }
+                  let url = URL(string: urlString) else { return }
             let request = URLRequest(url: url)
-            requestParser.parseRequest(request, with: self)
-        }
-    }
+            requestParser.parseRequest( request, with: self )}}
     
     func setMcbaReadyCallback(_ callback: McbaReadyCallback!) {
         if McbaConfiguration.sharedInstance().isMcbaReady() {
             callback()
-        } else {
-            self.mcbaReadyCallback = callback
-        }
-    }
+        } else { self.mcbaReadyCallback = callback }}
 }
 
