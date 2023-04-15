@@ -21,4 +21,7 @@ class LoggingNavigationDelegate: NSObject, WKNavigationDelegate {
         if let jsFilePath = Bundle.main.path(forResource: "init", ofType: "js"), let jsString = try? String(contentsOfFile: jsFilePath) {
             webView.evaluateJavaScript(jsString, completionHandler: nil)
         }}
+    
+    
+
 }

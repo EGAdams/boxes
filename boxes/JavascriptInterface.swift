@@ -16,6 +16,7 @@ class JavaScriptInterface: NSObject, WKScriptMessageHandler {
     var pushNotificationRegisterer: PushNotificationRegisterer
     var requestParser: RequestParser
     var webViewNavigationHandler: WebViewNavigationHandler
+    var javaScriptExecutor: JavaScriptExecutor
     weak var delegate: JavaScriptInterfaceDelegate?
 
     init( webView: WKWebView ) {
@@ -23,13 +24,14 @@ class JavaScriptInterface: NSObject, WKScriptMessageHandler {
         pushNotificationRegisterer = PushNotificationRegisterer(webView: webView)
         requestParser = RequestParser()
         webViewNavigationHandler = WebViewNavigationHandler()
-
-        super.init()
         let jsExecutor = JavaScriptExecutor( webView: webView )
         jsExecutor.bindDeviceFunctions()
 
         if !McbaConfiguration.sharedInstance().isJavascriptInitialized() {
-            McbaConfiguration.sharedInstance().javascriptInitialized = true }}
+            McbaConfiguration.sharedInstance().javascriptInitialized = true }
+    
+        super.init()
+    }
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if message.name == "MCBA" {
@@ -42,5 +44,13 @@ class JavaScriptInterface: NSObject, WKScriptMessageHandler {
         if McbaConfiguration.sharedInstance().isMcbaReady() {
             callback()
         } else { self.mcbaReadyCallback = callback }}
+    
+    func webView( _ webView: WKWebView, shouldStartLoadWith request: URLRequest, navigationType: WKWebView.Type ) -> Bool {
+        requestParser.parseRequest( request, with: self )
+        return webViewNavigationHandler.handleNavigation(for: request )}
+    
+    // define executeJavaScript function, but delegate to JavaScriptExecutor.runJs() method.
+    func executeJavaScript( _ script: String, completionHandler: ((Any?, Error?) -> Void)? = nil ) {
+        let jsExecutor = JavaScriptExecutor( webView: webView )
+        jsExecutor.runJs( script )}  // think about why you may need a completion handler here.
 }
-
