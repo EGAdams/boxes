@@ -2,19 +2,19 @@ import UIKit
 import WebKit
 
 // JavaScriptInterface.swift
-class JavaScriptInterface: NSObject, WKScriptMessageHandler {
-    
-    weak var delegate: JavaScriptInterfaceDelegate?
-    
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        delegate?.javascriptInterface(self, didReceiveMessage: message)
-        print(  "message.body: \(message.body)" )
-    }
-}
+//class JavaScriptInterface: NSObject, WKScriptMessageHandler {
+//
+//    weak var delegate: JavaScriptInterfaceDelegate?
+//
+//    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+//        delegate?.javascriptInterface(self, didReceiveMessage: message)
+//        print(  "message.body: \(message.body)" )
+//    }
+//}
 
-protocol JavaScriptInterfaceDelegate: AnyObject {
-    func javascriptInterface(_ javascriptInterface: JavaScriptInterface, didReceiveMessage message: WKScriptMessage)
-}
+//protocol JavaScriptInterfaceDelegate: AnyObject {
+//    func javascriptInterface(_ javascriptInterface: JavaScriptInterface, didReceiveMessage message: WKScriptMessage)
+//}
 
 // ViewController.swift
 class ViewController: UIViewController, JavaScriptInterfaceDelegate {
@@ -29,16 +29,18 @@ class ViewController: UIViewController, JavaScriptInterfaceDelegate {
         
         let webConfiguration = WKWebViewConfiguration()
         webConfiguration.preferences.javaScriptCanOpenWindowsAutomatically = true  // this defaults to false.  we may need this.
-
-        javascriptInterface = JavaScriptInterface()     // Initialize the JavaScriptInterface
-        javascriptInterface.delegate = self
         
         // Set the WKUserContentController for the WKWebViewConfiguration
         webConfiguration.userContentController = WKUserContentController()
         
+        webView = WKWebView(frame: view.frame, configuration: webConfiguration)
+        
+        javascriptInterface = JavaScriptInterface( webView: webView )     // Initialize the JavaScriptInterface
+        javascriptInterface.delegate = self
+        
         // Add the JavaScriptInterface to the WKWebView
         webConfiguration.userContentController.add(javascriptInterface, name: "MyApp")
-        webView = WKWebView(frame: view.frame, configuration: webConfiguration)
+        
         loggingNavigationDelegate = LoggingNavigationDelegate()
         webView.navigationDelegate = loggingNavigationDelegate
         view.addSubview(webView)

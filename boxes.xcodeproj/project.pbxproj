@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6F484D0029EA0D0E002F426A /* JavascriptInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F484CFF29EA0D0E002F426A /* JavascriptInterface.swift */; };
-		6F484D0229EA0FBC002F426A /* JavaScriptCommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F484D0129EA0FBC002F426A /* JavaScriptCommandHandler.swift */; };
 		6F484D0629EA34DC002F426A /* LoggingNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F484D0529EA34DC002F426A /* LoggingNavigationDelegate.swift */; };
 		6F484D0829EA3B7C002F426A /* buttons.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F484D0729EA3B7C002F426A /* buttons.html */; };
 		6F8A721C29E8C4B900C4A9C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A721B29E8C4B900C4A9C8 /* AppDelegate.swift */; };
@@ -19,6 +18,11 @@
 		6F8A723329E8C4B900C4A9C8 /* boxesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A723229E8C4B900C4A9C8 /* boxesTests.swift */; };
 		6F8A723E29E8C4B900C4A9C8 /* boxesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A723D29E8C4B900C4A9C8 /* boxesUITests.swift */; };
 		6F8A724C29E8CBCB00C4A9C8 /* init.js in Resources */ = {isa = PBXBuildFile; fileRef = 6F8A724B29E8CBCB00C4A9C8 /* init.js */; };
+		6FB5E71C29EB1CF70044E963 /* JavascriptExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5E71B29EB1CF70044E963 /* JavascriptExecutor.swift */; };
+		6FB5E71E29EB21750044E963 /* PushNotificationRegisterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5E71D29EB21750044E963 /* PushNotificationRegisterer.swift */; };
+		6FB5E72029EB21920044E963 /* RequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5E71F29EB21920044E963 /* RequestParser.swift */; };
+		6FB5E72229EB22570044E963 /* McbaConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5E72129EB22570044E963 /* McbaConfiguration.swift */; };
+		6FB5E72429EB22DE0044E963 /* WebViewNavigationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5E72329EB22DE0044E963 /* WebViewNavigationHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +44,6 @@
 
 /* Begin PBXFileReference section */
 		6F484CFF29EA0D0E002F426A /* JavascriptInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptInterface.swift; sourceTree = "<group>"; };
-		6F484D0129EA0FBC002F426A /* JavaScriptCommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaScriptCommandHandler.swift; sourceTree = "<group>"; };
 		6F484D0529EA34DC002F426A /* LoggingNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingNavigationDelegate.swift; sourceTree = "<group>"; };
 		6F484D0729EA3B7C002F426A /* buttons.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = buttons.html; sourceTree = "<group>"; };
 		6F8A721829E8C4B900C4A9C8 /* boxes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = boxes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +60,11 @@
 		6F8A723D29E8C4B900C4A9C8 /* boxesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = boxesUITests.swift; sourceTree = "<group>"; };
 		6F8A723F29E8C4B900C4A9C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F8A724B29E8CBCB00C4A9C8 /* init.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = init.js; sourceTree = "<group>"; };
+		6FB5E71B29EB1CF70044E963 /* JavascriptExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptExecutor.swift; sourceTree = "<group>"; };
+		6FB5E71D29EB21750044E963 /* PushNotificationRegisterer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationRegisterer.swift; sourceTree = "<group>"; };
+		6FB5E71F29EB21920044E963 /* RequestParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestParser.swift; sourceTree = "<group>"; };
+		6FB5E72129EB22570044E963 /* McbaConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = McbaConfiguration.swift; sourceTree = "<group>"; };
+		6FB5E72329EB22DE0044E963 /* WebViewNavigationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewNavigationHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,8 +124,12 @@
 				6F8A722929E8C4B900C4A9C8 /* Info.plist */,
 				6F8A724B29E8CBCB00C4A9C8 /* init.js */,
 				6F484CFF29EA0D0E002F426A /* JavascriptInterface.swift */,
-				6F484D0129EA0FBC002F426A /* JavaScriptCommandHandler.swift */,
+				6FB5E72329EB22DE0044E963 /* WebViewNavigationHandler.swift */,
 				6F484D0729EA3B7C002F426A /* buttons.html */,
+				6FB5E71B29EB1CF70044E963 /* JavascriptExecutor.swift */,
+				6FB5E71D29EB21750044E963 /* PushNotificationRegisterer.swift */,
+				6FB5E71F29EB21920044E963 /* RequestParser.swift */,
+				6FB5E72129EB22570044E963 /* McbaConfiguration.swift */,
 			);
 			path = boxes;
 			sourceTree = "<group>";
@@ -273,10 +285,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F8A722029E8C4B900C4A9C8 /* ViewController.swift in Sources */,
-				6F484D0229EA0FBC002F426A /* JavaScriptCommandHandler.swift in Sources */,
+				6FB5E72229EB22570044E963 /* McbaConfiguration.swift in Sources */,
 				6F484D0629EA34DC002F426A /* LoggingNavigationDelegate.swift in Sources */,
 				6F484D0029EA0D0E002F426A /* JavascriptInterface.swift in Sources */,
+				6FB5E72029EB21920044E963 /* RequestParser.swift in Sources */,
 				6F8A721C29E8C4B900C4A9C8 /* AppDelegate.swift in Sources */,
+				6FB5E71C29EB1CF70044E963 /* JavascriptExecutor.swift in Sources */,
+				6FB5E72429EB22DE0044E963 /* WebViewNavigationHandler.swift in Sources */,
+				6FB5E71E29EB21750044E963 /* PushNotificationRegisterer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

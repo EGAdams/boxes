@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objects Required for the JavaScript Interface</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f2f2f2;
+            padding: 1rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #000000;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #000000;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            color: #909b31;
+            margin-bottom: 1rem;
+        }
+
+        .class-box {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            padding: 2rem;
+            margin-bottom: 1rem;
+            margin-left: 5rem;
+            margin-right: 17rem;
+        }
+
+        .property {
+            font-weight: bold;
+            color: blue;
+        }
+
+        .method {
+            font-weight: bold;
+            color: purple;
+        }
+
+        .constructor {
+            font-weight: bold;
+            text-decoration: underline;
+            color: gray;
+        }
+
+        em {
+            font-style: italic;
+            color: #2f29df;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Objects Required for the JavaScript Interface</h1>
+    
+    <div class="class-box">
+        <h2>PushNotificationRegisterer</h2>
+        <p class="class-description">
+            <em>
+                PushNotificationRegisterer is a utility class responsible for registering push notifications in a
+                WKWebView. This class simplifies the process of registering push notifications by providing a
+                straightforward interface.
+            </em>
+        </p>
+        <h3>Constructor</h3>
+        <pre>
+    <code>
+    init(webView: WKWebView)
+    </code>
+        </pre>
+        <p class="constructor-description">
+            Initializes the PushNotificationRegisterer object with the given WKWebView instance.
+        </p>
+        <h3>Methods</h3>
+        <pre>
+    <code>
+    func register(url: String, mcbaId: Int, id: String)
+    </code>
+        </pre>
+        <p class="method-description">
+            Registers push notifications for the given URL, mcbaId, and id. Executes the appropriate JavaScript code in
+            the associated WKWebView. If an error occurs during the execution, it prints the error description.
+        </p>
+        <h3>Example</h3>
+        <pre>
+    <code>
+    let webView = WKWebView()
+    let pushNotificationRegisterer = PushNotificationRegisterer(webView: webView)
+    
+    // Load a URLRequest
+    webView.load(URLRequest(url: URL(string: "https://example.com")!))
+    
+    // Register push notifications using the PushNotificationRegisterer
+    pushNotificationRegisterer.register(url: "https://example.com/register_push", mcbaId: 123, id: "device_id")
+    </code>
+        </pre>
+    </div>
+
+    <div class="class-box">
+        <h2>JavaScriptExecutor</h2>
+        <p class="class-description">
+            <em>
+                JavaScriptExecutor is a utility class responsible for executing JavaScript code in a WKWebView. It
+                simplifies the process of running JavaScript code by providing a clean and easy-to-use interface.
+                By separating JavaScript execution into its own class, it promotes better code organization and
+                maintainability.
+            </em>
+        </p>
+        <h3>Constructor</h3>
+        <pre>
+    <code>
+    init(webView: WKWebView)
+    </code>
+        </pre>
+        <p class="constructor-description">
+            Initializes the JavaScriptExecutor object with the given WKWebView instance.
+        </p>
+        <h3>Methods</h3>
+        <pre>
+    <code>
+    func runJs(_ js: String)
+    </code>
+        </pre>
+        <p class="method-description">
+            Executes the provided JavaScript code in the associated WKWebView. If an error occurs during the execution,
+            it prints the error description.
+        </p>
+        <h3>Example</h3>
+        <pre>
+    <code>
+    let webView = WKWebView()
+    let javaScriptExecutor = JavaScriptExecutor(webView: webView)
+    
+    // Load a URLRequest
+    webView.load(URLRequest(url: URL(string: "https://example.com")!))
+    
+    // Run JavaScript code using the JavaScriptExecutor
+    javaScriptExecutor.runJs("alert('Hello, World!');")
+    </code>
+        </pre>
+    </div>
+    
+        
+        <div class="class-box">
+            <h2>JavascriptInterface</h2>
+            <p class="class-description">
+                <em>
+                    JavascriptInterface is a class that manages the communication between the native Swift code and the
+                    JavaScript code running in a WKWebView. It is designed to handle various tasks such as registering
+                    push notifications, parsing requests, and managing WebView navigation. By separating these
+                    responsibilities into different classes, it promotes a cleaner and more maintainable code structure.
+                </em>
+            </p>
+            <h3>Constructor</h3>
+            <pre>
+        <code>
+        init(view: WKWebView, pushNotificationRegisterer: PushNotificationRegisterer, requestParser: RequestParser, <br> webViewNavigationHandler: WebViewNavigationHandler)
+        </code>
+            </pre>
+            <p class="constructor-description">
+                Initializes the JavascriptInterface object with the given WKWebView, PushNotificationRegisterer,
+                RequestParser, and WebViewNavigationHandler instances.
+            </p>
+            <h3>Methods</h3>
+            <pre>
+        <code>
+        func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage)
+        </code>
+            </pre>
+            <p class="method-description">
+                Implements the WKScriptMessageHandler protocol to handle incoming messages from JavaScript running in the
+                WKWebView. The method processes the message and takes appropriate action depending on the message content.
+            </p>
+            <h3>Example</h3>
+            <pre>
+        <code>
+        let webView = WKWebView()
+        
+        let pushNotificationRegisterer = PushNotificationRegisterer(webView: webView)
+        let requestParser = RequestParser()
+        let webViewNavigationHandler = WebViewNavigationHandler(webView: webView, requestParser: requestParser)
+        
+        let javascriptInterface = JavascriptInterface(view: webView, pushNotificationRegisterer: pushNotificationRegisterer, 
+                                                      requestParser: requestParser, webViewNavigationHandler: webViewNavigationHandler)
+        
+        webView.configuration.userContentController.add(javascriptInterface, name: "swiftInterface")
+        
+        // Load a URLRequest and set the WKNavigationDelegate
+        webView.navigationDelegate = javascriptInterface
+        webView.load(URLRequest(url: URL(string: "https://example.com")!))
+        </code>
+            </pre>
+        </div>
+        
+        
+        <div class="class-box">
+            <h2>RequestParser</h2>
+            <em>
+                The <span class="class-name">RequestParser</span> class is a powerful and versatile tool designed to parse requests coming from WKScriptMessage objects.
+                It simplifies the process of deciphering the content of the message, making it easy for developers to work with the extracted data. By handling the 
+                parsing internally, it reduces the complexity of your code, making it more maintainable and easier to understand.
+            </em>
+            <em>
+            <p>
+                For instance, imagine you have a WKScriptMessage object containing user input from a form on a webpage. The <span class="class-name">RequestParser</span> can be used
+                to obtain a structured Request object from the WKScriptMessage, allowing you to access the relevant data without having to manually parse the message content.
+            </p>
+            </em>
+            <h3>Constructor</h3>
+            <ul>
+                <li>
+                    <span class="constructor">init()</span>
+                    <p>Initializer that takes no input parameters.</p>
+                </li>
+            </ul>
+            <h3>Methods</h3>
+            <ul>
+                <li>
+                    <span class="method">parseRequest(_ message: WKScriptMessage) -> Request?</span>
+                    <p>Parses the request from the WKScriptMessage, taking a reference to a WKScriptMessage as an input parameter, and returns an optional Request object.</p>
+                    <p><em>Example:</em></p>
+                    <pre>
+        <code>
+        let message: WKScriptMessage = ... // A WKScriptMessage from the web view
+        let requestParser = RequestParser()
+        if let request = requestParser.parseRequest(message) {
+            // Now you can access the parsed data in the 'request' object
+            print("Request type: \(request.type)")
+            print("Request data: \(request.data)")
+        } else {
+            print("Failed to parse the request")
+        }
+        </code>
+                    </pre>
+                </li>
+            </ul>
+        </div>
+        
+        
+        <div class="class-box">
+            <h2>WebViewNavigationHandler</h2>
+            <em>
+                WebViewNavigationHandler is a class designed to handle navigation-related tasks within the context of a
+                WKWebView. This class separates the navigation concerns from the JavaScriptInterface class, making it
+                easier to manage navigation events and promote a cleaner code structure.
+            </em>
+            <h3>Constructor</h3>
+            <pre>
+        <code>
+        init(webView: WKWebView, requestParser: RequestParser)
+        </code>
+            </pre>
+            <p class="constructor-description">
+                Initializes the WebViewNavigationHandler object with the given WKWebView and RequestParser instances.
+            </p>
+            <h3>Methods</h3>
+            <pre>
+        <code>
+        func handleNavigationAction(_ navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void)
+        </code>
+            </pre>
+            <p class="method-description">
+                Takes a WKNavigationAction and a decisionHandler closure, processes the navigation action, and calls the
+                decisionHandler with the appropriate WKNavigationActionPolicy (allow or cancel). Uses the provided
+                RequestParser instance to determine whether a request should be allowed or canceled.
+            </p>
+            <h3>Example</h3>
+            <pre>
+        <code>
+        let webView = WKWebView()
+        let requestParser = RequestParser()
+        let navigationHandler = WebViewNavigationHandler(webView: webView, requestParser: requestParser)
+        
+        let request = URLRequest(url: URL(string: "https://example.com")!)
+        webView.load(request)
+        
+        // Implement WKNavigationDelegate methods and use WebViewNavigationHandler
+        webView.navigationDelegate = self
+        
+        func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+            navigationHandler.handleNavigationAction(navigationAction, decisionHandler: decisionHandler)
+        }
+        </code>
+            </pre>
+        </div>
+        
+</body>
+</html>
+        
