@@ -7,7 +7,7 @@ import WebKit
 typealias McbaReadyCallback = () -> ()
 
 protocol JavaScriptInterfaceDelegate: AnyObject {
-    func javascriptInterface(_ javascriptInterface: JavaScriptInterface, didReceiveMessage message: WKScriptMessage)
+    func javascriptInterface( _ javascriptInterface: JavaScriptInterface, didReceiveMessage message: WKScriptMessage )
 }
 
 class JavaScriptInterface: NSObject, WKScriptMessageHandler {
@@ -21,7 +21,7 @@ class JavaScriptInterface: NSObject, WKScriptMessageHandler {
 
     init( webView: WKWebView ) {
         self.webView = webView
-        pushNotificationRegisterer = PushNotificationRegisterer(webView: webView)
+        pushNotificationRegisterer = PushNotificationRegisterer( webView: webView )
         requestParser = RequestParser()
         webViewNavigationHandler = WebViewNavigationHandler()
 
@@ -34,24 +34,24 @@ class JavaScriptInterface: NSObject, WKScriptMessageHandler {
         super.init()
     }
 
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print("Message received: \(message.body)")
+    func userContentController( _ userContentController: WKUserContentController, didReceive message: WKScriptMessage ) {
+        print("Message received: \( message.body )")
         if message.name == "MCBA" {
             guard let urlString = message.body as? String,
-                  let url = URL(string: urlString) else { return }
-            let request = URLRequest(url: url)
+                  let url = URL( string: urlString ) else { return }
+            let request = URLRequest( url: url )
             requestParser.parseRequest( request, with: self )}}
     
-    func setMcbaReadyCallback(_ callback: McbaReadyCallback!) {
+    func setMcbaReadyCallback( _ callback: McbaReadyCallback! ) {
         if McbaConfiguration.sharedInstance().isMcbaReady() {
             callback()
         } else { self.mcbaReadyCallback = callback }}
     
     func webView( _ webView: WKWebView, shouldStartLoadWith request: URLRequest, navigationType: WKWebView.Type ) -> Bool {
         requestParser.parseRequest( request, with: self )
-        return webViewNavigationHandler.handleNavigation(for: request )}
+        return webViewNavigationHandler.handleNavigation( for: request )}
     
-    func executeJavaScript(_ script: String, completionHandler: @escaping (Result<Any, Error>) -> Void) {
-        let jsExecutor = JavaScriptExecutor(webView: webView)
-        jsExecutor.runJs(script, completionHandler: completionHandler) }
+    func executeJavaScript( _ script: String, completionHandler: @escaping ( Result<Any, Error> ) -> Void ) {
+        let jsExecutor = JavaScriptExecutor( webView: webView )
+        jsExecutor.runJs( script, completionHandler: completionHandler ) }
 }
