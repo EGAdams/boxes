@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequence Diagram Animation - Buying a Soda</title>
+    <style>
+        svg {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sequence Diagram Animation - Buying a Soda</h1>
+    <svg id="sequenceDiagram" width="600" height="300" xmlns="http://www.w3.org/2000/svg">
+        <rect id="customerBox" x="100" y="30" width="100" height="40" fill="lightskyblue" />
+        <text x="125" y="55">Customer</text>
+        <rect id="vendingBox" x="400" y="30" width="100" height="40" fill="lightskyblue" />
+        <text x="415" y="55">Vending</text>
+        <line x1="150" y1="70" x2="150" y2="270" style="stroke:black;stroke-width:2" />
+        <line x1="450" y1="70" x2="450" y2="270" style="stroke:black;stroke-width:2" />
+        <line id="insertMoney" x1="150" y1="100" x2="450" y2="100" style="stroke:black;stroke-width:2;stroke-dasharray:6;stroke-opacity:0" marker-end="url(#arrow)" />
+        <text id="insertMoneyText" x="290" y="95" fill="black" style="font-size: 12px; opacity: 0">Insert Money</text>
+        <line id="dispenseSoda" x1="450" y1="150" x2="150" y2="150" style="stroke:black;stroke-width:2;stroke-dasharray:6;stroke-opacity:0" marker-end="url(#arrow)" />
+        <text id="dispenseSodaText" x="270" y="145" fill="black" style="font-size: 12px; opacity: 0">Dispense Soda</text>
+        <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L9,3 z" fill="#000" />
+            </marker>
+        </defs>
+    </svg>
+    <script>
+        const insertMoneyLine = document.getElementById("insertMoney");
+        const insertMoneyText = document.getElementById("insertMoneyText");
+        const dispenseSodaLine = document.getElementById("dispenseSoda");
+        const dispenseSodaText = document.getElementById("dispenseSodaText");
+
+        function animateInsertMoney() {
+            insertMoneyLine.style.strokeOpacity = 1;
+            insertMoneyText.style.opacity = 1;
+            setTimeout(animateDispenseSoda, 2000);
+        }
+
+        function animateDispenseSoda() {
+            dispenseSodaLine.style.strokeOpacity = 1;
+            dispenseSodaText.style.opacity = 1;
+        }
+
+        setTimeout(animateInsertMoney, 1000);
+    </script>
+</body>
+</html>

@@ -46,7 +46,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "48"
             endingLineNumber = "48"
-            landmarkName = "webView(_:shouldStartLoadWith:navigationType:)"
+            landmarkName = "setMcbaReadyCallback(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

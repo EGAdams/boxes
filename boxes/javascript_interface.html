@@ -39,7 +39,7 @@
             padding: 2rem;
             margin-bottom: 1rem;
             margin-left: 5rem;
-            margin-right: 17rem;
+            margin-right: 10rem;
         }
 
         .property {
@@ -156,56 +156,44 @@
     </div>
     
         
-        <div class="class-box">
-            <h2>JavascriptInterface</h2>
-            <p class="class-description">
-                <em>
-                    JavascriptInterface is a class that manages the communication between the native Swift code and the
-                    JavaScript code running in a WKWebView. It is designed to handle various tasks such as registering
-                    push notifications, parsing requests, and managing WebView navigation. By separating these
-                    responsibilities into different classes, it promotes a cleaner and more maintainable code structure.
-                </em>
-            </p>
-            <h3>Constructor</h3>
-            <pre>
-        <code>
-        init(view: WKWebView, pushNotificationRegisterer: PushNotificationRegisterer, requestParser: RequestParser, <br> webViewNavigationHandler: WebViewNavigationHandler)
-        </code>
-            </pre>
-            <p class="constructor-description">
-                Initializes the JavascriptInterface object with the given WKWebView, PushNotificationRegisterer,
-                RequestParser, and WebViewNavigationHandler instances.
-            </p>
-            <h3>Methods</h3>
-            <pre>
-        <code>
-        func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage)
-        </code>
-            </pre>
-            <p class="method-description">
-                Implements the WKScriptMessageHandler protocol to handle incoming messages from JavaScript running in the
-                WKWebView. The method processes the message and takes appropriate action depending on the message content.
-            </p>
-            <h3>Example</h3>
-            <pre>
-        <code>
-        let webView = WKWebView()
-        
-        let pushNotificationRegisterer = PushNotificationRegisterer(webView: webView)
-        let requestParser = RequestParser()
-        let webViewNavigationHandler = WebViewNavigationHandler(webView: webView, requestParser: requestParser)
-        
-        let javascriptInterface = JavascriptInterface(view: webView, pushNotificationRegisterer: pushNotificationRegisterer, 
-                                                      requestParser: requestParser, webViewNavigationHandler: webViewNavigationHandler)
-        
-        webView.configuration.userContentController.add(javascriptInterface, name: "swiftInterface")
-        
-        // Load a URLRequest and set the WKNavigationDelegate
-        webView.navigationDelegate = javascriptInterface
-        webView.load(URLRequest(url: URL(string: "https://example.com")!))
-        </code>
-            </pre>
-        </div>
+    <div class="class-box">
+        <h2>JavascriptInterface</h2>
+        <p class="class-description">
+            <em>
+                JavascriptInterface is a central class that interacts with the WKWebView, handling JavaScript code
+                execution, push notification registration, request parsing, and navigation. It separates different
+                responsibilities into separate classes, adhering to the best coding practices.
+            </em>
+        </p>
+        <h3>Constructor</h3>
+        <pre>
+    <code>
+    init(webView: WKWebView, pushNotificationRegisterer: PushNotificationRegisterer, requestParser: RequestParser, webViewNavigationHandler: WebViewNavigationHandler)
+    </code>
+        </pre>
+        <p class="constructor-description">
+            Initializes the JavascriptInterface object with the given WKWebView instance and instances of
+            PushNotificationRegisterer, RequestParser, and WebViewNavigationHandler.
+        </p>
+        <h3>Methods</h3>
+        <pre>
+    <code>
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage)
+    func webView(_ webView: WKWebView, shouldStartLoadWith request: URLRequest, navigationType: WKWebView.Type ) -> Bool
+    </code>
+        </pre>
+        <p class="method-description">
+            Handles incoming messages from JavaScript. Registers push notifications if the message is a push notification
+            registration request.
+        </p>
+        <p class="method-description">
+            This delegate method is called when a new request is about to start loading in the WKWebView. It uses the
+            RequestParser to parse the request and the WebViewNavigationHandler to handle navigation for the request. Returns
+            a boolean indicating whether the navigation should proceed or not.
+        </p>
+    </div>
+    
+    
         
         
         <div class="class-box">
@@ -257,7 +245,7 @@
             <em>
                 WebViewNavigationHandler is a class designed to handle navigation-related tasks within the context of a
                 WKWebView. This class separates the navigation concerns from the JavaScriptInterface class, making it
-                easier to manage navigation events and promote a cleaner code structure.
+                easier to manage navigation events.
             </em>
             <h3>Constructor</h3>
             <pre>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Animation</title>
+    <style>
+        svg {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Moving Circle Animation</h1>
+    <svg id="animation" width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+        <circle id="circle" cx="50" cy="100" r="10" fill="blue" />
+    </svg>
+    <script>
+        const svg = document.getElementById("animation");
+        const circle = document.getElementById("circle");
+
+        let direction = 1;
+
+        function animate() {
+            let cx = parseFloat(circle.getAttribute("cx"));
+
+            if (cx >= 390 || cx <= 10) {
+                direction *= -1;
+            }
+
+            circle.setAttribute("cx", cx + direction);
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>

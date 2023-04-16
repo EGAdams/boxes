@@ -6,6 +6,7 @@
 import Foundation
 
 class RequestParser {
+
     func parseRequest(_ request: URLRequest, with javascriptInterface: JavaScriptInterface) {
         if let url = request.url, url.scheme == "mcba-ios" {
             let urlString = url.absoluteURL.absoluteString.replacingOccurrences(of: "mcba-ios:", with: "")
@@ -21,7 +22,7 @@ class RequestParser {
                 McbaConfiguration.sharedInstance().setMcbaReady(ready: true)
                 if let callback = javascriptInterface.mcbaReadyCallback { callback()}
                 let jsExecutor = JavaScriptExecutor(webView: javascriptInterface.webView )
-                jsExecutor.runJs("MCBA.load();")
+                jsExecutor.runJs( "MCBA.load();", completionHandler: completionHandler )
             case "exit":
                 print("exiting...")
             case "log":
@@ -29,4 +30,12 @@ class RequestParser {
             default:
                 break
             }}}
+            
+    func completionHandler(result: Result<Any, Error>) {
+        switch result {
+        case .success(let html):
+            print(html)
+        case .failure(let error):
+            print(error.localizedDescription)
+        }}
 }

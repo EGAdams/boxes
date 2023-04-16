@@ -20,20 +20,24 @@ class JavaScriptInterface: NSObject, WKScriptMessageHandler {
     weak var delegate: JavaScriptInterfaceDelegate?
 
     init( webView: WKWebView ) {
-        self.webView = webView
-        pushNotificationRegisterer = PushNotificationRegisterer(webView: webView)
-        requestParser = RequestParser()
-        webViewNavigationHandler = WebViewNavigationHandler()
-        let jsExecutor = JavaScriptExecutor( webView: webView )
-        jsExecutor.bindDeviceFunctions()
+    self.webView = webView
+    pushNotificationRegisterer = PushNotificationRegisterer(webView: webView)
+    requestParser = RequestParser()
+    webViewNavigationHandler = WebViewNavigationHandler()
 
-        if !McbaConfiguration.sharedInstance().isJavascriptInitialized() {
-            McbaConfiguration.sharedInstance().javascriptInitialized = true }
-    
-        super.init()
+    javaScriptExecutor = JavaScriptExecutor( webView: webView )
+    javaScriptExecutor.bindDeviceFunctions()
+
+    if !McbaConfiguration.sharedInstance().isJavascriptInitialized() {
+        McbaConfiguration.sharedInstance().javascriptInitialized = true
     }
 
+    super.init()
+}
+
+
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        print("Message received: \(message.body)")
         if message.name == "MCBA" {
             guard let urlString = message.body as? String,
                   let url = URL(string: urlString) else { return }
@@ -49,8 +53,8 @@ class JavaScriptInterface: NSObject, WKScriptMessageHandler {
         requestParser.parseRequest( request, with: self )
         return webViewNavigationHandler.handleNavigation(for: request )}
     
-    // define executeJavaScript function, but delegate to JavaScriptExecutor.runJs() method.
-    func executeJavaScript( _ script: String, completionHandler: ((Any?, Error?) -> Void)? = nil ) {
-        let jsExecutor = JavaScriptExecutor( webView: webView )
-        jsExecutor.runJs( script )}  // think about why you may need a completion handler here.
+    func executeJavaScript(_ script: String, completionHandler: @escaping (Result<Any, Error>) -> Void) {
+        let jsExecutor = JavaScriptExecutor(webView: webView)
+        jsExecutor.runJs(script, completionHandler: completionHandler)
+    }
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequence Diagram Example</title>
+</head>
+<body>
+    <h1>Simple Sequence Diagram</h1>
+    <svg width="400" height="230" xmlns="http://www.w3.org/2000/svg">
+        <!-- Actors -->
+        <rect x="50" y="10" width="2" height="180" fill="black" />
+        <rect x="350" y="10" width="2" height="180" fill="black" />
+        <text x="35" y="215" font-size="14">Actor A</text>
+        <text x="335" y="215" font-size="14">Actor B</text>
+
+        <!-- Message -->
+        <line x1="52" y1="60" x2="348" y2="60" stroke="black" stroke-width="1" marker-end="url(#arrowhead)" />
+        <text x="190" y="55" font-size="12">Message</text>
+
+        <!-- Response -->
+        <line x1="348" y1="100" x2="52" y2="100" stroke="black" stroke-width="1" marker-end="url(#arrowhead)" />
+        <text x="190" y="95" font-size="12">Response</text>
+
+        <!-- Lifelines -->
+        <line x1="51" y1="30" x2="349" y2="30" stroke="black" stroke-width="0.5" stroke-dasharray="4" />
+
+        <!-- Arrowhead definition -->
+        <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                <polygon points="0 0, 10 3.5, 0 7" fill="black" />
+            </marker>
+        </defs>
+    </svg>
+</body>
+</html>
