@@ -20,21 +20,19 @@ class JavaScriptInterface: NSObject, WKScriptMessageHandler {
     weak var delegate: JavaScriptInterfaceDelegate?
 
     init( webView: WKWebView ) {
-    self.webView = webView
-    pushNotificationRegisterer = PushNotificationRegisterer(webView: webView)
-    requestParser = RequestParser()
-    webViewNavigationHandler = WebViewNavigationHandler()
+        self.webView = webView
+        pushNotificationRegisterer = PushNotificationRegisterer(webView: webView)
+        requestParser = RequestParser()
+        webViewNavigationHandler = WebViewNavigationHandler()
 
-    javaScriptExecutor = JavaScriptExecutor( webView: webView )
-    javaScriptExecutor.bindDeviceFunctions()
+        javaScriptExecutor = JavaScriptExecutor( webView: webView )
+        javaScriptExecutor.bindDeviceFunctions()
 
-    if !McbaConfiguration.sharedInstance().isJavascriptInitialized() {
-        McbaConfiguration.sharedInstance().javascriptInitialized = true
+        if !McbaConfiguration.sharedInstance().isJavascriptInitialized() {
+            McbaConfiguration.sharedInstance().javascriptInitialized = true
+        }
+        super.init()
     }
-
-    super.init()
-}
-
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         print("Message received: \(message.body)")
@@ -55,6 +53,5 @@ class JavaScriptInterface: NSObject, WKScriptMessageHandler {
     
     func executeJavaScript(_ script: String, completionHandler: @escaping (Result<Any, Error>) -> Void) {
         let jsExecutor = JavaScriptExecutor(webView: webView)
-        jsExecutor.runJs(script, completionHandler: completionHandler)
-    }
+        jsExecutor.runJs(script, completionHandler: completionHandler) }
 }
