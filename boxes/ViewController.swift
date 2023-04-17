@@ -16,14 +16,18 @@ class ViewController: UIViewController, JavaScriptInterfaceDelegate {
         let filesToDownload: [URL: String] = [
             URL(string: "https://americansjewelry.com/chat/chat.html")!: "chatHTML",
             URL(string: "https://americansjewelry.com/chat/config.json")!: "configJSON",
-            URL(string: "https://americansjewelry.com/chat/css/chat.css")!: "chatCSS",
             URL(string: "https://americansjewelry.com/chat/js/chat.js")!: "chatJS",
+            URL(string: "https://americansjewelry.com/chat/css/chat.css")!: "chatCSS"
         ]
+        
+        print("Files to download: \(filesToDownload)")
         
         webFileManager.downloadFiles(files: filesToDownload) { [weak self] in
             guard let self = self else { return }
             if let fileURL = self.webFileManager.prepareWebView() {
+                print("WebView base URL: \(fileURL.deletingLastPathComponent())") // Add this print statement
                 self.setupWebView()
+                print("File URL: \(fileURL)")
                 self.webView.loadFileURL(fileURL, allowingReadAccessTo: fileURL.deletingLastPathComponent())
             }
         }

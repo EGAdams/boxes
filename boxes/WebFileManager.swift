@@ -41,33 +41,45 @@ class WebFileManager: DownloaderDelegate {
         
         dispatchGroup.notify(queue: .main) {
             completion()
+            print("Finished downloading files")
         }
     }
     
     private func downloadFile(from url: URL, withIdentifier identifier: String, completion: @escaping (Bool) -> Void) {
-        let downloadTask = URLSession.shared.downloadTask(with: url) { [weak self] (location, response, error) in
-            guard let self = self, let location = location else {
+        let localURL = getLocalFileURL(for: url)
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Error downloading \(url): \(error)")
                 completion(false)
                 return
             }
-            
-            let localURL = self.getLocalFileURL(for: url)
-            let fileManager = FileManager.default
-            
+
+            guard let data = data else {
+                print("No data received for \(url)")
+                completion(false)
+                return
+            }
+
             do {
-                if fileManager.fileExists(atPath: localURL.path) {
-                    try fileManager.removeItem(at: localURL)
+                try data.write(to: localURL)
+                print("\(identifier) downloaded and saved to \(localURL)")
+
+                // Add these lines to print the content of the downloaded files
+                do {
+                    let fileContent = try String(contentsOf: localURL)
+                    print("File content for \(identifier):")
+                    print(fileContent)
+                } catch {
+                    print("Error reading file content for \(identifier): \(error)")
                 }
-                
-                try fileManager.copyItem(at: location, to: localURL)
+
                 completion(true)
             } catch {
-                print("Error while copying file: \(error)")
+                print("Error writing data to \(localURL): \(error)")
                 completion(false)
             }
         }
-        
-        downloadTask.resume()
+        task.resume()
     }
     
     private func getLocalFileURL(for remoteURL: URL) -> URL {
