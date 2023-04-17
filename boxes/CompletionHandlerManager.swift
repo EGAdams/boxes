@@ -31,6 +31,7 @@ class CompletionHandlerManager {
     func removeCompletionHandler(forIdentifier identifier: String) {
         queue.sync {
             completionHandlerQueue.removeValue(forKey: identifier)
+            return // Add this line to suppress the warning
         }
     }
 }

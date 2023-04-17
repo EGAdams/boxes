@@ -20,7 +20,7 @@ class DownloadCallbackManager: NSObject, URLSessionDownloadDelegate, DownloaderD
     func removeDownloadFinishedCallback(identifier: String) {
         queue.sync {
             callbackQueue.removeValue(forKey: identifier)
-            return // Add this line to suppress the warning
+            return // rid warning
         }
     }
 

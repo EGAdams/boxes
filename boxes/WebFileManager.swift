@@ -27,13 +27,16 @@ class WebFileManager: DownloaderDelegate {
         downloadCallbackManager.delegate = self
     }
     
-    func downloadFiles(files: [URL: String], completion: @escaping () -> Void) {
+    func downloadFiles( files: [URL: String], completion: @escaping () -> Void ) {
         // Download files
     }
     
-    func prepareWebView() {
-        // Prepare WebView with downloaded files
+    func prepareWebView() -> URL? {
+        print("Preparing WebView...")
+        guard let chatHTMLFileURL = URL(string: "http://americansjewelry.com/chat/chat.html") else { return nil }
+        return getLocalURL(for: chatHTMLFileURL)
     }
+
 
     func downloader(_ downloader: Downloader, didFinishDownloadingTo location: URL, for identifier: String) {
         // Handle the download completion
