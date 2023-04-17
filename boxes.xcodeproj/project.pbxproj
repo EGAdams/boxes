@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F1061E629ED9A940063D773 /* WebFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1061E529ED9A940063D773 /* WebFileManager.swift */; };
 		6F1A140129ECAFED005ED718 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A140029ECAFED005ED718 /* Downloader.swift */; };
 		6F1A140329ECB68B005ED718 /* DownloadCallbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A140229ECB68B005ED718 /* DownloadCallbackManager.swift */; };
 		6F484D0029EA0D0E002F426A /* JavascriptInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F484CFF29EA0D0E002F426A /* JavascriptInterface.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F1061E529ED9A940063D773 /* WebFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebFileManager.swift; sourceTree = "<group>"; };
 		6F1A140029ECAFED005ED718 /* Downloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		6F1A140229ECB68B005ED718 /* DownloadCallbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadCallbackManager.swift; sourceTree = "<group>"; };
 		6F484CFF29EA0D0E002F426A /* JavascriptInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptInterface.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				6FB1555029ECBD4600E4E48E /* CompletionHandlerManager.swift */,
 				6FB1555229ECD04900E4E48E /* DownloadProgressTracker.swift */,
 				6FB1555429ECD21400E4E48E /* FileHandler.swift */,
+				6F1061E529ED9A940063D773 /* WebFileManager.swift */,
 			);
 			path = boxes;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 			files = (
 				6FB1555129ECBD4600E4E48E /* CompletionHandlerManager.swift in Sources */,
 				6F1A140129ECAFED005ED718 /* Downloader.swift in Sources */,
+				6F1061E629ED9A940063D773 /* WebFileManager.swift in Sources */,
 				6FB1555329ECD04900E4E48E /* DownloadProgressTracker.swift in Sources */,
 				6F8A722029E8C4B900C4A9C8 /* ViewController.swift in Sources */,
 				6FB5E72229EB22570044E963 /* McbaConfiguration.swift in Sources */,

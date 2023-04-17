@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facade explaination</title>
+</head>
+<body>
+    <div class="markdown prose w-full break-words dark:prose-invert light"><p>The Facade Pattern is a structural design pattern that provides a simplified, unified interface to a set of interfaces or classes in a subsystem. It defines a higher-level interface that makes the subsystem easier to use by wrapping complex functionalities and exposing only what is necessary. By doing so, it helps to reduce the complexity of the client code that interacts with the subsystem.</p><p>In the solution provided, I implemented the Facade Pattern by introducing a new class called <code>WebFileManager</code>. This class acts as a facade that simplifies the interactions between the <code>ViewController</code> and the download-related classes (<code>Downloader</code>, <code>FileHandler</code>, <code>DownloadProgressTracker</code>, <code>DownloadCallbackManager</code>, and <code>CompletionHandlerManager</code>).</p><p><code>WebFileManager</code> encapsulates the logic for managing downloads, handling download completion events, and preparing the WebView with the downloaded files. Instead of having the <code>ViewController</code> directly interact with multiple classes and manage their states, the <code>ViewController</code> now only interacts with the <code>WebFileManager</code>. This reduces the complexity in the <code>ViewController</code> and makes it easier to understand and maintain.</p><p>The Facade Pattern not only simplifies the client code but also promotes better separation of concerns, as each class focuses on its specific responsibility. In our case, the <code>WebFileManager</code> takes care of managing downloads and handling WebView updates, while the <code>ViewController</code> focuses on managing the user interface and user interactions. This adherence to the Single Responsibility Principle (one of the SOLID principles) makes the code more modular and easier to maintain.</p></div>
+</body>
+</html>

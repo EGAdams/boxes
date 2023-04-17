@@ -1,15 +1,10 @@
-//
-//  DownloadCallbackManager.swift
-//
-//  Created by Clay Ackerland on 4/16/23.
-//
 import Foundation
 
 protocol DownloadCallbackManagerDelegate: AnyObject {
     func downloadCallbackManager(_ downloadCallbackManager: DownloadCallbackManager, didFinishDownloading identifier: String)
 }
 
-class DownloadCallbackManager: NSObject, URLSessionDownloadDelegate {
+class DownloadCallbackManager: NSObject, URLSessionDownloadDelegate, DownloaderDelegate {
 
     // Add the delegate property
     weak var delegate: DownloadCallbackManagerDelegate?
@@ -25,7 +20,9 @@ class DownloadCallbackManager: NSObject, URLSessionDownloadDelegate {
     func removeDownloadFinishedCallback(identifier: String) {
         queue.sync {
             callbackQueue.removeValue(forKey: identifier)
-        }}
+            return // Add this line to suppress the warning
+        }
+    }
 
     func callDownloadFinishedCallback(identifier: String, location: URL?) {
         DispatchQueue.main.async { [weak self] in
@@ -41,4 +38,13 @@ class DownloadCallbackManager: NSObject, URLSessionDownloadDelegate {
 
             // Call the delegate method
             self.delegate?.downloadCallbackManager(self, didFinishDownloading: identifier)}
+
+    // DownloaderDelegate methods
+    func downloader(_ downloader: Downloader, didFinishDownloadingTo location: URL, for identifier: String) {
+        // Handle download completion
+    }
+    
+    func downloader(_ downloader: Downloader, didFailWithError error: Error, for identifier: String) {
+        // Handle download failure
+    }
 }
