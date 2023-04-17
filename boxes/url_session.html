@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>urlSession(_:downloadTask:didFinishDownloadingTo:) Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+css
+Copy code
+    code {
+        background-color: #f4f4f4;
+        border-radius: 5px;
+        padding: 2px 5px;
+    }
+
+    pre {
+        background-color: #f4f4f4;
+        border-radius: 5px;
+        padding: 15px;
+    }
+
+    h2, h3 {
+        color: #333;
+    }
+
+    ul, ol {
+        padding-left: 20px;
+    }
+
+    li {
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body>
+    <h2>urlSession(_:downloadTask:didFinishDownloadingTo:) Method</h2>
+    <p>The <code>urlSession(_:downloadTask:didFinishDownloadingTo:)</code> method is a delegate method of the <code>URLSessionDownloadDelegate</code> protocol. This method is called when a download task finishes downloading a file successfully.</p>
+<h3>Method Signature</h3>
+<pre>
+func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL)
+</pre>
+<h3>Parameters</h3>
+<ul>
+    <li>
+        <code>session</code>: The URLSession instance associated with the download task.
+    </li>
+    <li>
+        <code>downloadTask</code>: The URLSessionDownloadTask instance that finished downloading the file.
+    </li>
+    <li>
+        <code>location</code>: A temporary URL where the downloaded file is located. This file will be removed once the delegate method returns, so it is important to move or process the file as needed within the delegate method.
+    </li>
+</ul>
+
+<h3>What it does</h3>
+<ol>
+    <li>
+        Obtains the identifier from the download task's <code>taskDescription</code> property.
+    </li>
+    <li>
+        Calls the <code>callCallback(_:location:)</code> method, passing the identifier and the temporary location of the downloaded file. This method is responsible for invoking the registered <code>DownloadFinishedCallback</code> for the given identifier.
+    </li>
+</ol>
+
+<h3>Example Usage</h3>
+<p>Assuming you have an instance of the McbaUpdateManager class:</p>
+<pre>
+let updateManager = McbaUpdateManager()
+updateManager.updateMcba("https://example.com/file.zip", identifier: "fileDownload")
+</pre>
+<p>When the file finishes downloading, the <code>urlSession(_:downloadTask:didFinishDownloadingTo:)</code> method will be called automatically by the system, and the registered callback for the "fileDownload" identifier will be executed.</p>
+
+</body>
+</html>

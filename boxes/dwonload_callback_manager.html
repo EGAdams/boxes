@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DownloadCallbackManager Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f7f9fb;
+            color: #333;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #4c7aa7;
+        }
+        h2 {
+            color: #2f6197;
+            border-bottom: 2px solid #2f6197;
+            padding-bottom: 10px;
+        }
+        h3 {
+            color: #1d3e66;
+        }
+        code {
+            font-family: 'Courier New', monospace;
+            background-color: #eee;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>DownloadCallbackManager</h1>
+    <p>
+        The <code>DownloadCallbackManager</code> class is responsible for managing the download completion and error handling callbacks. It stores the callbacks and provides methods for adding and removing callbacks based on a unique identifier.
+    </p>
+<h2>Properties</h2>
+<h3><code>private var downloadCompletionCallbacks: [String: DownloadFinishedCallback]</code></h3>
+<p>
+    A dictionary to store download completion callbacks with unique identifiers as keys.
+</p>
+
+<h2>Methods</h2>
+<h3><code>func addDownloadFinishedCallback(_ callback: @escaping DownloadFinishedCallback, forIdentifier identifier: String)</code></h3>
+<p>
+    Adds a download completion callback to the <code>downloadCompletionCallbacks</code> dictionary with the specified identifier.
+</p>
+
+<h3><code>func removeDownloadFinishedCallback(forIdentifier identifier: String)</code></h3>
+<p>
+    Removes the download completion callback associated with the specified identifier from the <code>downloadCompletionCallbacks</code> dictionary.
+</p>
+
+<h3><code>func callDownloadFinishedCallback(forIdentifier identifier: String, withLocation location: URL?)</code></h3>
+<p>
+    Calls the download completion callback associated with the specified identifier and passes the downloaded file location as a parameter. The callback is removed from the <code>downloadCompletionCallbacks</code> dictionary after it is called.
+</p>
+</body>
+</html>

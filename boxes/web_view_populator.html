@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS WebView App Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        h2, h3 {
+            color: #4CAF50;
+            padding-left: 1rem;
+        }
+        p {
+            padding: 0 1rem;
+            line-height: 1.5;
+        }
+        pre {
+            background-color: #ddd;
+            padding: 1rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <h1>iOS WebView App Documentation</h1>
+    <h2>Goal</h2>
+    <p>
+        The goal is to download the required files from the remote server, recreate the directory structure on the iOS device, and display the chat.html web page in a WebView using the downloaded files as the source.
+    </p>
+    <h2>Objects and Classes</h2>
+    <h3>Downloader</h3>
+    <p>
+        The Downloader class will be responsible for downloading the files from the remote server. It will utilize URLSession and URLSessionDownloadTask to download the files.
+    </p>
+    <h3>DownloadCallbackManager</h3>
+    <p>
+        The DownloadCallbackManager class will manage the download completion callbacks. This class will store the completion callbacks for each download task and execute them when the corresponding download task finishes.
+    </p>
+    <h3>CompletionHandlerManager</h3>
+    <p>
+        The CompletionHandlerManager class will manage the URLSession completion handlers. This class will store the completion handlers for each URLSession and execute them when the corresponding URLSession finishes.
+    </p>
+    <h3>DownloadProgressTracker</h3>
+    <p>
+        The DownloadProgressTracker class will be responsible for tracking the download progress. It will receive progress updates from the Downloader class and report the progress to the app, allowing the app to display the progress to the user.
+    </p>
+    <h3>FileHandler</h3>
+    <p>
+        The FileHandler class will be responsible for managing the local file system. It will create the necessary directory structure and save the downloaded files to the appropriate locations. It will also provide the file URLs to the WebView for displaying the chat.html web page.
+    </p>
+    <h2>Workflow</h2>
+    <ol>
+        <li>Use the Downloader class to download the required files (chat.html, config.json, chat.css, and chat.js) from the remote server.</li>
+        <li>For each download task, use the DownloadCallbackManager to store a completion callback that will be executed when the download is finished.</li>
+        <li>Use the DownloadProgressTracker to track and display the download progress to the user.</li>
+        <li>When a download task is completed, the corresponding completion callback from DownloadCallbackManager will be executed. This callback will save the downloaded file to the appropriate location using the FileHandler class.</li>
+        <li>After all the files have been downloaded and saved, use the FileHandler class to provide the file URLs to the WebView.</li>
+        <li>Load the chat.html file into the WebView using the file URL provided by the FileHandler. The WebView will automatically use the other downloaded files (chat.css, chat.js, and config.json) since they are located in the same local directory structure as chat.html.</li>
+    <li>Once the chat.html web page is displayed in the WebView, the chat.js script will use the config.json file to populate the remaining parts of the chat.html page.</li>
+</ol>
+<h2>Summary</h2>
+<p>
+    The proposed solution utilizes the following classes: Downloader, DownloadCallbackManager, CompletionHandlerManager, DownloadProgressTracker, and FileHandler. These classes will work together to download the required files from the remote server, recreate the directory structure on the iOS device, and display the chat.html web page in a WebView using the downloaded files as the source.
+</p>
+</body>
+</html>

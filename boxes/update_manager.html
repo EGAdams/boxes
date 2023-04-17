@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift Code Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            padding: 20px;
+            color: #333;
+        }
+css
+Copy code
+    h1 {
+        font-size: 2.5rem;
+        text-align: center;
+        color: #444;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        margin-top: 40px;
+        color: #1A7BB9;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+        color: #1A7BB9;
+    }
+
+    p {
+        font-size: 1.1rem;
+    }
+
+    pre {
+        background-color: #EEE;
+        padding: 10px;
+        font-size: 1.1rem;
+        color: #444;
+        border-radius: 5px;
+    }
+
+    .code {
+        background-color: #FFF;
+        padding: 20px;
+        border: 1px solid #DDD;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .improvement {
+        color: #FF6B81;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+    <h1>Swift Code Documentation</h1>
+
+<h2>Overview</h2>
+<p>The following Swift code is part of a file download manager. It handles downloading files from the internet, managing callbacks, and performing tasks related to file downloads. In this document, we will provide a detailed explanation of the code and its functionality. If there are any areas of improvement, we will indicate them in the HTML document as well.</p>
+
+<div class="code">
+    <h3>Functions</h3>
+    <ul>
+        <li><code>addDownloadFinishedCallback(_:identifier:)</code></li>
+        <li><code>addCompletionHandler(_:identifier:)</code></li>
+        <li><code>callCallback(_:location:)</code></li>
+        <li><code>callCompletionHandlerForSession(_:)</code></li>
+        <li><code>urlSessionDidFinishEvents(forBackgroundURLSession:)</code></li>
+        <li><code>urlSession(_:didBecomeInvalidWithError:)</code></li>
+        <li><code>urlSession(_:didReceive:completionHandler:)</code></li>
+        <li><code>urlSession(_:downloadTask:didWriteData:totalBytesWritten:totalBytesExpectedToWrite:)</code></li>
+        <li><code>urlSession(_:task:didCompleteWithError:)</code></li>
+        <li><code>urlSession(_:downloadTask:didResumeAtOffset:expectedTotalBytes:)</code></li>
+        <li><code>matches(for:in:)</code></li>
+        <li><code>printAttributes(filename:)</code></li>
+    </ul>
+</div>
+
+<h2>Function Descriptions</h2>
+<h3><code>addDownloadFinishedCallback(_:identifier:)</code></h3>
+<p>This function adds a download finished callback to the <code>callbackQueue</code> dictionary with the specified identifier.</p>
+<pre>
+“func addDownloadFinishedCallback( _ callback: @“
+escaping DownloadFinishedCallback, identifier: String ) { callbackQueue[identifier] = callback }
+</pre>
+
+<h3><code>addCompletionHandler(_:identifier:)</code></h3>
+<p>This function adds a completion handler to the <code>handlerQueue</code> dictionary with the specified identifier and logs the addition of the completion handler.</p>
+<pre>
+    func addCompletionHandler( _ handler: @escaping CompleteHandlerBlock, identifier: String ) {
+        self.ajax.sendLog( class_method: "(#function )" + ": " + "(#line )", message: "adding completion handler..." )
+        handlerQueue[identifier] = handler }
+        </pre>
+        
+        <h3><code>callCallback(_:location:)</code></h3>
+        <p>This function calls the download finished callback for the specified identifier and removes the callback from the <code>callbackQueue</code> dictionary. If there's an issue with the code, it's indicated in the comment.</p>
+        <pre>
+        func callCallback( _ identifier: String!, location: URL? ) {
+        DispatchQueue.main.async {
+        if let callback: DownloadFinishedCallback = self.callbackQueue[identifier] {
+        self.callbackQueue!.removeValue( forKey: identifier )
+        if location != nil {
+        callback( location )
+        } else { callback( nil )}}} // end of DispatchQueue.main.async {
+        } // wrapped on Saturday Novemer 16, 2019. callbackQueue!.removeValue( forKey: identifier ) is throwing EXC_BAD_ACCESS ( code=1, address=ox5001e ) error
+        </pre>
+        
+        <h3><code>callCompletionHandlerForSession(_:)</code></h3>
+        <p>This function calls the completion handler for the specified session identifier and removes the handler from the <code>handlerQueue</code> dictionary.</p>
+        <pre>
+        func callCompletionHandlerForSession( _ identifier: String!) {
+        self.ajax.sendLog( class_method: "(#function )" + ": " + "(#line )", message: "call background completion handler callback" )
+        self.ajax.sendLog( class_method: "(#function )" + ": " + "(#line )", message: "identifier ( String( describing: identifier )) handlerQueue: " + String( describing: handlerQueue ))
+        if var _: CompleteHandlerBlock = handlerQueue[ identifier ] { if ( handlerQueue[identifier] != nil ) { handlerQueue!.removeValue( forKey: identifier )}}}
+        </pre>
+        
+        <h3><code>urlSessionDidFinishEvents(forBackgroundURLSession:)</code></h3>
+        <p>This function is called when all events for a background URL session have completed. It then calls the completion handler for the session.</p>
+        <pre>
+        func urlSessionDidFinishEvents( forBackgroundURLSession session: URLSession ) {
+        if !session.configuration.identifier!.isEmpty {
+        self.ajax.sendLog( class_method: "(#function )" + ": " + "(#line )", message: "mcbaCompletion Handler BACKGROUND" )
+        callCompletionHandlerForSession( session.configuration.identifier )}}
+        </pre>
+        
+        <h3><code>urlSession(_:didBecomeInvalidWithError:)</code></h3>
+        <p>This function is called when a URL session becomes invalid due to an error. It prints the error message.</p>
+        <pre>
+        func urlSession( _ session: URLSession, didBecomeInvalidWithError error: Error?) {
+        print("ERROR - didBecomeInvalidWithError: ( String( describing: error?.localizedDescription ))." )}
+        </pre>
+        
+        <h3><code>urlSession(_:didReceive:completionHandler:)</code>
+        
+        </h3>
+            <p>This function is called when a URL session receives an authentication challenge. It uses the provided completionHandler to respond to the challenge with the appropriate URLCredential.</p>
+            <pre>
+        func urlSession( _ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping ( URLSession.AuthChallengeDisposition, URLCredential?) -> Void ) {
+            self.ajax.sendLog( class_method: "\(#function )" + ": " + "\(#line )", message: "mcbaReceived challenge" )
+            completionHandler( Foundation.URLSession.AuthChallengeDisposition.useCredential, URLCredential( trust: challenge.protectionSpace.serverTrust!))}
+            </pre>
+
+        <h3><code>urlSession(_:downloadTask:didWriteData:totalBytesWritten:totalBytesExpectedToWrite:)</code></h3>
+        <p>This function is called periodically during a download task to report the progress of the download.</p>
+        <pre>
+        func urlSession( _ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64 ) {}
+        </pre>
+        
+        <h3><code>urlSession(_:task:didCompleteWithError:)</code></h3>
+        <p>This function is called when a URLSessionTask completes its work. It prints a success message if there was no error, or the error description if there was an error.</p>
+        <pre>
+            func urlSession( _ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+                if error == nil {
+                print( "Completed successfully." )
+                } else { print("Failed, error: ( String( describing: error?.localizedDescription ))" )}}
+                </pre>
+                
+                <h3><code>urlSession(_:downloadTask:didResumeAtOffset:expectedTotalBytes:)</code></h3>
+                <p>This function is called when a download task resumes after being paused. It prints the current offset and the expected total bytes of the download.</p>
+                <pre>
+                func urlSession( _ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64 ) {
+                print("Download resumed at offset ( fileOffset ) bytes out of an expected ( expectedTotalBytes ) bytes." )}
+                </pre>
+                
+                <h3><code>matches(for:in:)</code></h3>
+                <p>This function returns an array of strings that match the given regular expression pattern in the provided text. If the regular expression is invalid, it returns an empty array and prints an error message.</p>
+                <pre>
+                func matches( for regex: String, in text: String ) -> [String] {
+                do {
+                let regex = try NSRegularExpression( pattern: regex )
+                let results = regex.matches( in: text, range: NSRange( text.startIndex..., in: text ))
+                return results.map { String( text[Range($0.range, in: text )!])}
+                } catch let error {
+                print("invalid regex: ( error.localizedDescription )" )
+                return [] }} // end regex
+                </pre>
+                
+                <h3><code>printAttributes(filename:)</code></h3>
+                <p>This function prints the attributes of the specified file using FileManager. If there's an error, it prints an error message.</p>
+                <pre>
+                func printAttributes( filename: String ) -> Void {
+                let fileManager = FileManager()
+                do { // Get attributes of 'myfile.txt' file
+                // let attributes = try fileManager.attributesOfItemAtPath( filename )
+                let attributes = try file
+                catch let error as NSError {
+                    print("Ooops! Something went wrong: \( error )" )}}
+                </pre>
+                </div> <!-- /#content -->
+                <footer>
+                    <p>Generated with love by Agent 4.</p>
+                </footer>
+                </body>
+                </html>
+                
+                
+                

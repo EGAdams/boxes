@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP File Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f7f9fb;
+            color: #333;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #4c7aa7;
+        }
+        h2 {
+            color: #2f6197;
+            border-bottom: 2px solid #2f6197;
+            padding-bottom: 10px;
+        }
+        h3 {
+            color: #1d3e66;
+        }
+        code {
+            font-family: 'Courier New', monospace;
+            background-color: #eee;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>PHP File Documentation</h1>
+    <p>This PHP file is responsible for generating a JSON-encoded array containing version and file mapping information. It reads and processes various directories such as templates, JavaScript, CSS, images, and webfonts.</p>
+
+<h2>Variables</h2>
+<h3><code>$config</code></h3>
+<p>Reads the "app_config.json" file and stores its content as a string.</p>
+
+<h3><code>$templateDir</code></h3>
+<p>Stores the template directory name from the configuration.</p>
+
+<h3><code>$files</code></h3>
+<p>An array containing the file paths of all relevant files.</p>
+
+<h3><code>$js, $css, $img, $webfonts</code></h3>
+<p>Arrays containing file paths of JavaScript, CSS, images, and webfonts files, respectively.</p>
+
+<h2>Functions</h2>
+<h3><code>ListIn($dir, $prefix = '')</code></h3>
+<p>A function that recursively lists all files in a given directory, excluding files and directories with certain conditions, such as the "backup" directory, files with a tilde (~), and sitemap files. It returns an array of file paths.</p>
+
+<h2>Main Script</h2>
+<p>The main script processes the directories, populates the <code>$files</code> array, and then encodes the array into a JSON format, including version and file mapping information, which is then outputted.</p>
+</body>
+</html>

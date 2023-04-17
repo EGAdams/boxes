@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileHandler Class</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2em;
+            color: #333;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        h3 {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        p {
+            color: #777;
+        }
+
+        code {
+            background-color: #e8e8e8;
+            padding: 2px 4px;
+            font-family: "Courier New", monospace;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>FileHandler Class</h1>
+    <p>The <code>FileHandler</code> class is responsible for managing the file system related tasks, such as saving, deleting, and retrieving files. This class provides an abstraction to handle files on the local device, making it easier to interact with the file system.</p>
+
+    <h2>Main Responsibilities</h2>
+    <ul>
+        <li><strong>Save Files:</strong> Save files to the local file system with the given URL and directory path.</li>
+        <li><strong>Delete Files:</strong> Delete files from the local file system using the provided file URL.</li>
+        <li><strong>Retrieve Files:</strong> Retrieve the local file URL based on the given remote URL and directory path.</li>
+    </ul>
+
+    <h2>Methods</h2>
+    <ul>
+        <li>
+            <h3><code>func saveFile(from remoteURL: URL, to localURL: URL) throws</code></h3>
+            <p>This method is responsible for saving a file from a remote URL to a local URL. If an error occurs during the process, it throws an appropriate error.</p>
+        </li>
+        <li>
+            <h3><code>func deleteFile(at url: URL) throws</code></h3>
+            <p>This method is responsible for deleting a file at the specified local URL. If an error occurs during the process, it throws an appropriate error.</p>
+        </li>
+        <li>
+            <h3><code>func localFileURL(for remoteURL: URL, in directory: String) -> URL?</code></h3>
+            <p>This method is responsible for generating a local file URL based on the given remote URL and directory path. It returns the local file URL if the file exists or <code>nil</code> if the file does not exist.</p>
+        </li>
+    </ul>
+</body>
+</html>

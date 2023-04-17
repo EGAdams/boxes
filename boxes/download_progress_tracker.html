@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DownloadProgressTracker Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+css
+Copy code
+    h1, h2, h3 {
+        color: #333;
+    }
+
+    pre, code {
+        background-color: #eee;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    pre {
+        display: block;
+        padding: 10px;
+        overflow: auto;
+        border: 1px solid #ccc;
+    }
+
+    code {
+        font-family: Consolas, Monaco, monospace;
+    }
+
+    ul {
+        padding-left: 20px;
+    }
+
+    li {
+        margin-bottom: 5px;
+    }
+</style>
+</head>
+<body>
+    <h1>DownloadProgressTracker</h1>
+    <p>
+        The DownloadProgressTracker is a class that will handle tracking and reporting the progress of the file downloads. This class will work in conjunction with the Downloader class and provide necessary updates on the download progress.
+    </p>
+<h2>Responsibilities</h2>
+<ul>
+    <li>Track the progress of each individual file download.</li>
+    <li>Calculate the overall download progress based on the individual file download progress.</li>
+    <li>Notify the relevant components (such as UI components) about the download progress updates.</li>
+</ul>
+
+<h2>Properties</h2>
+<ul>
+    <li><code>progressUpdateHandler: (Double) -> Void</code> - A closure that will be called with the updated overall download progress (represented as a value between 0 and 1).</li>
+    <li><code>fileDownloadProgress: [String: Double]</code> - A dictionary that maps file identifiers to their respective download progress values.</li>
+</ul>
+
+<h2>Methods</h2>
+<ul>
+    <li><code>updateProgress(forIdentifier identifier: String, progress: Double)</code> - Update the progress of a file download with the given identifier and notify the progressUpdateHandler with the updated overall download progress.</li>
+    <li><code>resetProgress()</code> - Reset the progress tracking by clearing the fileDownloadProgress dictionary.</li>
+</ul>
+
+<h2>Usage</h2>
+<p>
+    The DownloadProgressTracker will be used by the Downloader class to report the progress of each individual file download. The DownloadProgressTracker will then calculate the overall download progress and notify the relevant components (such as UI components) about the download progress updates.
+</p>
+</body>
+</html>
