@@ -7,8 +7,7 @@
 import Foundation
 import WebKit
 
-class LoggingNavigationDelegate: NSObject, WKNavigationDelegate {
-    
+class LoggingNavigationDelegate: NSObject, WKNavigationDelegate, WKScriptMessageHandler { 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let url = navigationAction.request.url, url.scheme == "console-log" {
             print("[JavaScript console.log]:", url.absoluteString.removingPercentEncoding?.replacingOccurrences(of: "console-log://", with: "") ?? "")
@@ -22,6 +21,8 @@ class LoggingNavigationDelegate: NSObject, WKNavigationDelegate {
             webView.evaluateJavaScript(jsString, completionHandler: nil)
         }}
     
-    
-
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if message.name == "jsLog" {
+            print("JavaScript Log: \(message.body)")
+        }}
 }

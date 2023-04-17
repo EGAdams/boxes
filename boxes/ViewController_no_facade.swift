@@ -97,6 +97,4 @@ class ViewController: UIViewController, JavaScriptInterfaceDelegate, DownloaderD
     func downloader(_ downloader: Downloader, didFailWithError error: Error, for identifier: String) {
         // Implement the method for handling download failure
     }
-    
-    
 }

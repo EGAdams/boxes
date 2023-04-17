@@ -2,7 +2,7 @@ import UIKit
 import WebKit
 
 /** @class ViewController */
-class ViewController: UIViewController, JavaScriptInterfaceDelegate {
+class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
     var webView: WKWebView!
     private var javascriptBridge: WKUserContentController!
     private var javascriptInterface: JavaScriptInterface!
@@ -22,6 +22,9 @@ class ViewController: UIViewController, JavaScriptInterfaceDelegate {
         
         print("Files to download: \(filesToDownload)")
         
+        // Delete local files before downloading new ones
+        webFileManager.deleteLocalFiles(files: filesToDownload)
+
         webFileManager.downloadFiles(files: filesToDownload) { [weak self] in
             guard let self = self else { return }
             if let fileURL = self.webFileManager.prepareWebView() {
@@ -30,6 +33,12 @@ class ViewController: UIViewController, JavaScriptInterfaceDelegate {
                 print("File URL: \(fileURL)")
                 self.webView.loadFileURL(fileURL, allowingReadAccessTo: fileURL.deletingLastPathComponent())
             }
+        }
+    }
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if message.name == "jsLog" {
+            print("JavaScript Log: \(message.body)")
         }
     }
     
@@ -51,7 +60,23 @@ class ViewController: UIViewController, JavaScriptInterfaceDelegate {
             webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
+        
+        let contentController = webView.configuration.userContentController
+        let script = """
+            function logToNative(message) {
+                window.webkit.messageHandlers.jsLog.postMessage(message);
+            }
+            console.log = function(message) {
+                logToNative(message);
+            }
+        """
+        let userScript = WKUserScript(source: script, injectionTime: .atDocumentStart, forMainFrameOnly: true)
+        contentController.addUserScript(userScript)
+        
+        let javaScriptLogger = JavaScriptLogger()
+        contentController.add(javaScriptLogger, name: "jsLog")
     }
+
 }
 
 

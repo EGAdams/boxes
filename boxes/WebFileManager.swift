@@ -12,6 +12,8 @@ class WebFileManager: DownloaderDelegate {
     private let downloadProgressTracker: DownloadProgressTracker
     private let downloadCallbackManager: DownloadCallbackManager
     private let completionHandlerManager: CompletionHandlerManager
+    private let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+
     
     init() {
         self.fileHandler = FileHandler()
@@ -27,6 +29,18 @@ class WebFileManager: DownloaderDelegate {
         downloadCallbackManager.delegate = self
     }
     
+    func deleteLocalFiles(files: [URL: String]) {
+        for (url, _) in files {
+            let fileURL = getLocalFileURL(for: url)
+            do {
+                try FileManager.default.removeItem(at: fileURL)
+                print("Deleted local file: \(fileURL.lastPathComponent)")
+            } catch {
+                print("Failed to delete local file: \(fileURL.lastPathComponent) - \(error.localizedDescription)")
+            }
+        }
+    }
+
     func downloadFiles(files: [URL: String], completion: @escaping () -> Void) {
         print("Starting file downloads...") // Add this print statement
         
@@ -83,10 +97,10 @@ class WebFileManager: DownloaderDelegate {
     }
     
     private func getLocalFileURL(for remoteURL: URL) -> URL {
-        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let fileURL = documentsURL.appendingPathComponent(remoteURL.lastPathComponent)
-        return fileURL
+        let fileIdentifier = remoteURL.lastPathComponent
+        return documentsDirectory.appendingPathComponent(fileIdentifier)
     }
+
 
     func prepareWebView() -> URL? {
         print("Preparing WebView...")
