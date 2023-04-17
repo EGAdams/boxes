@@ -8,24 +8,26 @@ class ViewController: UIViewController, JavaScriptInterfaceDelegate {
     private var javascriptInterface: JavaScriptInterface!
     private var loggingNavigationDelegate: LoggingNavigationDelegate!
     
-    // Add the WebFileManager instance
     private let webFileManager = WebFileManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Define the filesToDownload dictionary
         let filesToDownload: [URL: String] = [
-            URL( string: "http://americansjewelry.com/chat/chat.html"    )!: "chat.html",
-            URL( string: "http://americansjewelry.com/chat/config.json"  )!: "config.json",
-            URL( string: "http://americansjewelry.com/chat/css/chat.css" )!: "chat.css",
-            URL( string: "http://americansjewelry.com/chat/js/chat.js"   )!: "chat.js", ]
+            URL(string: "https://americansjewelry.com/chat/chat.html")!: "chatHTML",
+            URL(string: "https://americansjewelry.com/chat/config.json")!: "configJSON",
+            URL(string: "https://americansjewelry.com/chat/css/chat.css")!: "chatCSS",
+            URL(string: "https://americansjewelry.com/chat/js/chat.js")!: "chatJS",
+        ]
         
-        // Replace the downloadFiles() call with webFileManager.downloadFiles()
-        webFileManager.downloadFiles( files: filesToDownload ) { [ weak self ] in
-            self?.webFileManager.prepareWebView()
+        webFileManager.downloadFiles(files: filesToDownload) { [weak self] in
+            guard let self = self else { return }
+            if let fileURL = self.webFileManager.prepareWebView() {
+                self.setupWebView()
+                self.webView.loadFileURL(fileURL, allowingReadAccessTo: fileURL.deletingLastPathComponent())
+            }
         }
-        setupWebView()}
+    }
     
     // Implement the required method of the JavaScriptInterfaceDelegate protocol
     func javascriptInterface( _ javascriptInterface: JavaScriptInterface, didReceiveMessage message: WKScriptMessage ) {

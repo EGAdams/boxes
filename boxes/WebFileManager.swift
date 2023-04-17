@@ -27,15 +27,61 @@ class WebFileManager: DownloaderDelegate {
         downloadCallbackManager.delegate = self
     }
     
-    func downloadFiles( files: [URL: String], completion: @escaping () -> Void ) {
-        // Download files
+    func downloadFiles(files: [URL: String], completion: @escaping () -> Void) {
+        print("Starting file downloads...") // Add this print statement
+        
+        let dispatchGroup = DispatchGroup()
+        for (url, identifier) in files {
+            dispatchGroup.enter()
+            downloadFile(from: url, withIdentifier: identifier) { success in
+                print("Downloaded \(url) with identifier: \(identifier), success: \(success)") // Add this print statement
+                dispatchGroup.leave()
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            completion()
+        }
     }
     
+    private func downloadFile(from url: URL, withIdentifier identifier: String, completion: @escaping (Bool) -> Void) {
+        let downloadTask = URLSession.shared.downloadTask(with: url) { [weak self] (location, response, error) in
+            guard let self = self, let location = location else {
+                completion(false)
+                return
+            }
+            
+            let localURL = self.getLocalFileURL(for: url)
+            let fileManager = FileManager.default
+            
+            do {
+                if fileManager.fileExists(atPath: localURL.path) {
+                    try fileManager.removeItem(at: localURL)
+                }
+                
+                try fileManager.copyItem(at: location, to: localURL)
+                completion(true)
+            } catch {
+                print("Error while copying file: \(error)")
+                completion(false)
+            }
+        }
+        
+        downloadTask.resume()
+    }
+    
+    private func getLocalFileURL(for remoteURL: URL) -> URL {
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let fileURL = documentsURL.appendingPathComponent(remoteURL.lastPathComponent)
+        return fileURL
+    }
+
     func prepareWebView() -> URL? {
         print("Preparing WebView...")
-        guard let chatHTMLFileURL = URL(string: "http://americansjewelry.com/chat/chat.html") else { return nil }
-        return getLocalURL(for: chatHTMLFileURL)
+        guard let chatHTMLFileURL = URL(string: "https://americansjewelry.com/chat/chat.html") else { return nil }
+        return getLocalFileURL(for: chatHTMLFileURL)
     }
+
 
 
     func downloader(_ downloader: Downloader, didFinishDownloadingTo location: URL, for identifier: String) {
