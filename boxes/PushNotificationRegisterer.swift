@@ -8,7 +8,9 @@ import WebKit
 
 class PushNotificationRegisterer {
     var webView: WKWebView!
-    init(webView: WKWebView) { self.webView = webView }
+    init(webView: WKWebView) { 
+        print( "initializing PushNotificationRegisterer... " )
+        self.webView = webView }
     
     func completionHandler(result: Result<Any, Error>) {
         switch result {

@@ -7,6 +7,11 @@ import Foundation
 
 class RequestParser {
 
+    // constructor
+    init() {
+        print( "initializing RequestParser... " )
+    }
+    
     func parseRequest(_ request: URLRequest, with javascriptInterface: JavaScriptInterface) {
         if let url = request.url, url.scheme == "mcba-ios" {
             let urlString = url.absoluteURL.absoluteString.replacingOccurrences(of: "mcba-ios:", with: "")

@@ -12,7 +12,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print( "entering view did load in the view controller... " )
         let filesToDownload: [URL: String] = [
             URL(string: "https://americansjewelry.com/chat/chat.html")!: "chatHTML",
             URL(string: "https://americansjewelry.com/chat/config.json")!: "configJSON",

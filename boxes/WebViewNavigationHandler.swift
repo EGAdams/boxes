@@ -10,6 +10,12 @@ import UIKit
 import WebKit
 
 class WebViewNavigationHandler {
+    
+    // constructor
+    init() {
+        print( "initializing WebViewNavigationHandler... " )
+    }
+    
     func handleNavigation(for request: URLRequest) -> Bool {
         // let mainInstance = McbaConfiguration.sharedInstance()
         // let mLibraryBundle = Bundle(identifier: "awm.ios.mcba.mLibrary")

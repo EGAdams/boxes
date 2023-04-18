@@ -6,6 +6,12 @@
 import Foundation
 
 class DownloadProgressTracker {
+
+    // constructor
+    init() {
+        print( "initializing DownloadProgressTracker... " )
+    }
+
     // A closure that will be called with the updated overall download progress (represented as a value between 0 and 1)
     var progressUpdateHandler: ((Double) -> Void)?
     
@@ -33,7 +39,7 @@ class DownloadProgressTracker {
     
     func allFilesDownloaded() -> Bool {
         // Your logic to check if all files are downloaded
-        print( "*** make sure to implement this.  i am just returning true to help comile. *** " )
+        print( "*** make sure to implement this.  i am just returning true to help compile. *** " )
         return true
     }
 }

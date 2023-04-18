@@ -8,9 +8,9 @@ import Foundation
 import WebKit
 
 class JavaScriptLogger: NSObject, WKScriptMessageHandler {
+    override init() {  print( "initializing JavaScriptLogger... " )}
+
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if message.name == "jsLog", let logMessage = message.body as? String {
-            print("[JavaScript]: \(logMessage)")
-        }
-    }
+            print("[JavaScript]: \(logMessage)")}}
 }

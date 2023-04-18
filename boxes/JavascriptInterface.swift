@@ -20,6 +20,7 @@ class JavaScriptInterface: NSObject, WKScriptMessageHandler {
     weak var delegate: JavaScriptInterfaceDelegate?
 
     init( webView: WKWebView ) {
+        print( "initializing JavaScriptInterface... " )
         self.webView = webView
         pushNotificationRegisterer = PushNotificationRegisterer( webView: webView )
         requestParser = RequestParser()

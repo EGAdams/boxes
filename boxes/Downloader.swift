@@ -17,6 +17,7 @@ class Downloader: NSObject {
     weak var delegate: DownloaderDelegate?
     
     init(delegate: DownloaderDelegate?, sessionConfiguration: URLSessionConfiguration = .default) {
+        print( "initializing Downloader... " )
         self.delegate = delegate
         self.sessionConfiguration = sessionConfiguration
         self.downloadTasks = [:]

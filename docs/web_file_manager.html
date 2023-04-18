@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebFileManager Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+        p {
+            font-size: 22px;
+        }
+        ul {
+            font-size: 20px;
+            margin-bottom: 80px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>WebFileManager</h1>
+    <p>
+        The WebFileManager class is designed to facilitate the downloading and
+        management of remote files, such as HTML, CSS, and JavaScript files. It
+        is specifically designed to work with WKWebView to display the downloaded
+        files within the app.
+    </p>
+
+    <h2>Methods</h2>
+
+    <h3>downloadFiles(files:completionHandler:)</h3>
+    <p>
+        This method downloads the specified files from the remote URLs and saves
+        them locally on the device.
+    </p>
+    <pre>
+    func downloadFiles(files: [URL: String], completionHandler: @escaping () -> Void)
+    </pre>
+    <ul>
+        <li><strong>files:</strong> A dictionary containing the remote URLs as keys and their corresponding local identifiers as values.</li>
+        <li><strong>completionHandler:</strong> A closure that is called once all files have been downloaded and saved locally.</li>
+    </ul>
+
+    <h3>deleteLocalFiles(files:)</h3>
+    <p>
+        This method deletes the specified local files from the device.
+    </p>
+    <pre>
+    func deleteLocalFiles(files: [URL: String])
+    </pre>
+    <ul>
+        <li><strong>files:</strong> A dictionary containing the remote URLs as keys and their corresponding local identifiers as values.</li>
+    </ul>
+
+    <h3>prepareWebView() -> URL?</h3>
+    <p>
+        This method prepares the WKWebView to display the downloaded files.
+    </p>
+    <pre>
+    func prepareWebView() -> URL?
+    </pre>
+    <ul>
+        <li><strong>Returns:</strong> An optional URL pointing to the local HTML file to be displayed in the WKWebView.</li>
+    </ul>
+
+    <h3>getLocalFileURL(for:) -> URL?</h3>
+    <p>
+        This method returns the local file URL for the given identifier.
+    </p>
+    <pre>
+    func getLocalFileURL(for identifier: String) -> URL?
+    </pre>
+    <ul>
+        <li><strong>identifier:</strong> A string representing the local identifier for the desired file.</li>
+        <li><strong>Returns:</strong> An optional URL pointing to the local file with the specified identifier.</li>
+    </ul>
+    <br><br><br>
+</body>
+</html>

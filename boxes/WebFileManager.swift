@@ -16,6 +16,7 @@ class WebFileManager: DownloaderDelegate {
 
     
     init() {
+        print( "initializing WebFileManager... " )
         self.fileHandler = FileHandler()
         self.downloadCallbackManager = DownloadCallbackManager()
         downloadProgressTracker = DownloadProgressTracker()
@@ -80,9 +81,9 @@ class WebFileManager: DownloaderDelegate {
 
                 // Add these lines to print the content of the downloaded files
                 do {
-                    let fileContent = try String(contentsOf: localURL)
-                    print("File content for \(identifier):")
-                    print(fileContent)
+                    _ = try String(contentsOf: localURL)
+                    // print("File content for \(identifier):")
+                    // print(fileContent)
                 } catch {
                     print("Error reading file content for \(identifier): \(error)")
                 }

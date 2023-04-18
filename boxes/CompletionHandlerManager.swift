@@ -1,6 +1,5 @@
 //
 //  CompletionHandlerManager.swift
-//  boxes
 //
 //  Created by Clay Ackerland on 4/16/23.
 //
@@ -12,11 +11,12 @@ class CompletionHandlerManager {
     private var completionHandlerQueue: [String: CompleteHandlerBlock] = [:]
     private let queue = DispatchQueue(label: "com.yourapp.CompletionHandlerManager")
 
+    // constructor
+    init() { print( "initializing CompletionHandlerManager... " )}
+
     func addCompletionHandler(_ handler: @escaping CompleteHandlerBlock, forIdentifier identifier: String) {
         queue.sync {
-            completionHandlerQueue[identifier] = handler
-        }
-    }
+            completionHandlerQueue[ identifier ] = handler }}
 
     func callCompletionHandler(forIdentifier identifier: String) {
         queue.sync {
@@ -24,14 +24,11 @@ class CompletionHandlerManager {
             completionHandlerQueue.removeValue(forKey: identifier)
             DispatchQueue.main.async {
                 completionHandler(nil, nil, nil) // Pass the appropriate values as needed
-            }
-        }
-    }
+            }}}
 
     func removeCompletionHandler(forIdentifier identifier: String) {
         queue.sync {
             completionHandlerQueue.removeValue(forKey: identifier)
-            return // Add this line to suppress the warning
-        }
-    }
+            return }} // Add this line to suppress the warning
+        
 }

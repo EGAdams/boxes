@@ -8,7 +8,10 @@ class DownloadCallbackManager: NSObject, URLSessionDownloadDelegate, DownloaderD
 
     // Add the delegate property
     weak var delegate: DownloadCallbackManagerDelegate?
-     
+
+    // constructor
+    override init () { print( "initializing DownloadCallbackManager... " ) } //  super.init()
+   
     private var callbackQueue: [String: DownloadCallbackManagerDelegate] = [:]
     private let queue = DispatchQueue(label: "com.downloadcallbackmanager.queue")
 
