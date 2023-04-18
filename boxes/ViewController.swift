@@ -13,6 +13,14 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
     override func viewDidLoad() {
         super.viewDidLoad()
         print( "entering view did load in the view controller... " )
+
+        let webConfiguration = WKWebViewConfiguration()
+        webConfiguration.preferences.javaScriptCanOpenWindowsAutomatically = true
+        let contentController = WKUserContentController()
+        let errorLoggingScriptMessageHandler = ErrorLoggingScriptMessageHandler()
+        contentController.add(errorLoggingScriptMessageHandler, name: "errorLog")
+        webConfiguration.userContentController = contentController
+
         let filesToDownload: [URL: String] = [
             URL(string: "https://americansjewelry.com/chat/chat.html")!: "chatHTML",
             URL(string: "https://americansjewelry.com/chat/config.json")!: "configJSON",

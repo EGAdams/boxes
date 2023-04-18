@@ -14,6 +14,7 @@
 		6F484D0029EA0D0E002F426A /* JavascriptInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F484CFF29EA0D0E002F426A /* JavascriptInterface.swift */; };
 		6F484D0629EA34DC002F426A /* LoggingNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F484D0529EA34DC002F426A /* LoggingNavigationDelegate.swift */; };
 		6F484D0829EA3B7C002F426A /* buttons.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F484D0729EA3B7C002F426A /* buttons.html */; };
+		6F6991E729EF0577000E4F53 /* ErrorLoggingScriptMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6991E629EF0577000E4F53 /* ErrorLoggingScriptMessageHandler.swift */; };
 		6F8A721C29E8C4B900C4A9C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A721B29E8C4B900C4A9C8 /* AppDelegate.swift */; };
 		6F8A722029E8C4B900C4A9C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A721F29E8C4B900C4A9C8 /* ViewController.swift */; };
 		6F8A722329E8C4B900C4A9C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F8A722129E8C4B900C4A9C8 /* Main.storyboard */; };
@@ -57,6 +58,7 @@
 		6F484CFF29EA0D0E002F426A /* JavascriptInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptInterface.swift; sourceTree = "<group>"; };
 		6F484D0529EA34DC002F426A /* LoggingNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingNavigationDelegate.swift; sourceTree = "<group>"; };
 		6F484D0729EA3B7C002F426A /* buttons.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = buttons.html; sourceTree = "<group>"; };
+		6F6991E629EF0577000E4F53 /* ErrorLoggingScriptMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorLoggingScriptMessageHandler.swift; sourceTree = "<group>"; };
 		6F8A721829E8C4B900C4A9C8 /* boxes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = boxes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8A721B29E8C4B900C4A9C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F8A721F29E8C4B900C4A9C8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				6FB1555429ECD21400E4E48E /* FileHandler.swift */,
 				6F1061E529ED9A940063D773 /* WebFileManager.swift */,
 				6F1061E729EDF8E40063D773 /* JavaScriptLogger.swift */,
+				6F6991E629EF0577000E4F53 /* ErrorLoggingScriptMessageHandler.swift */,
 			);
 			path = boxes;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 			files = (
 				6FB1555129ECBD4600E4E48E /* CompletionHandlerManager.swift in Sources */,
 				6F1A140129ECAFED005ED718 /* Downloader.swift in Sources */,
+				6F6991E729EF0577000E4F53 /* ErrorLoggingScriptMessageHandler.swift in Sources */,
 				6F1061E629ED9A940063D773 /* WebFileManager.swift in Sources */,
 				6FB1555329ECD04900E4E48E /* DownloadProgressTracker.swift in Sources */,
 				6F8A722029E8C4B900C4A9C8 /* ViewController.swift in Sources */,
