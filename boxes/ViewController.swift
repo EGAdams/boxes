@@ -30,10 +30,11 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
             if let fileURL = self.webFileManager.prepareWebView() {
                 print("WebView base URL: \(fileURL.deletingLastPathComponent())") // Add this print statement
                 self.setupWebView()
-                print("File URL: \(fileURL)")
+                print( "loading file url: \(fileURL)... " )
                 self.webView.loadFileURL(fileURL, allowingReadAccessTo: fileURL.deletingLastPathComponent())
             }
         }
+        print( "finished view did load in the view controller... " )
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -44,11 +45,11 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
     
     // Implement the required method of the JavaScriptInterfaceDelegate protocol
     func javascriptInterface( _ javascriptInterface: JavaScriptInterface, didReceiveMessage message: WKScriptMessage ) {
-        // Example: print the message body
-        print( "Received message from JavaScript: \( message.body )" )
+        print( "Received message from JavaScript: \( message.body )" ) // Example: print the message body
     }
 
     func setupWebView() {
+        print( "setting up web view... " )
         let webConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webView.translatesAutoresizingMaskIntoConstraints = false
@@ -71,9 +72,11 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
             }
         """
         let userScript = WKUserScript(source: script, injectionTime: .atDocumentStart, forMainFrameOnly: true)
-        contentController.addUserScript(userScript)
+        print( "    adding user script... " )
+        contentController.addUserScript( userScript )
         
         let javaScriptLogger = JavaScriptLogger()
+        print( "    adding javascript logger... " )
         contentController.add(javaScriptLogger, name: "jsLog")
     }
 

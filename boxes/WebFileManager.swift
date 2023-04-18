@@ -35,7 +35,7 @@ class WebFileManager: DownloaderDelegate {
             let fileURL = getLocalFileURL(for: url)
             do {
                 try FileManager.default.removeItem(at: fileURL)
-                print("Deleted local file: \(fileURL.lastPathComponent)")
+                // print("Deleted local file: \(fileURL.lastPathComponent)")
             } catch {
                 print("Failed to delete local file: \(fileURL.lastPathComponent) - \(error.localizedDescription)")
             }
@@ -43,20 +43,20 @@ class WebFileManager: DownloaderDelegate {
     }
 
     func downloadFiles(files: [URL: String], completion: @escaping () -> Void) {
-        print("Starting file downloads...") // Add this print statement
+        print( "Starting file downloads..." ) // Add this print statement
         
         let dispatchGroup = DispatchGroup()
         for (url, identifier) in files {
             dispatchGroup.enter()
             downloadFile(from: url, withIdentifier: identifier) { success in
-                print("Downloaded \(url) with identifier: \(identifier), success: \(success)") // Add this print statement
+                // print("Downloaded \(url) with identifier: \(identifier), success: \(success)") // Add this print statement
                 dispatchGroup.leave()
             }
         }
         
         dispatchGroup.notify(queue: .main) {
             completion()
-            print("Finished downloading files")
+            print( "Finished downloading files" )
         }
     }
     
@@ -77,7 +77,7 @@ class WebFileManager: DownloaderDelegate {
 
             do {
                 try data.write(to: localURL)
-                print("\(identifier) downloaded and saved to \(localURL)")
+                // print("\(identifier) downloaded and saved to \(localURL)")
 
                 // Add these lines to print the content of the downloaded files
                 do {
