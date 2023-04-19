@@ -17,18 +17,14 @@ class WebFileManager: DownloaderDelegate {
     
     init() {
         print( "initializing WebFileManager... " )
-        self.fileHandler = FileHandler()
+        self.fileHandler             = FileHandler()
         self.downloadCallbackManager = DownloadCallbackManager()
-        downloadProgressTracker = DownloadProgressTracker()
-        completionHandlerManager = CompletionHandlerManager()
+        downloadProgressTracker      = DownloadProgressTracker()
+        completionHandlerManager     = CompletionHandlerManager()
         self.downloader = Downloader(delegate: self)
         
-        if let downloader = downloader {
-            downloader.delegate = downloadCallbackManager
-        }
-
-        downloadCallbackManager.delegate = self
-    }
+        if let downloader = downloader { downloader.delegate = downloadCallbackManager }
+        downloadCallbackManager.delegate = self }
     
     func deleteLocalFiles(files: [URL: String]) {
         for (url, _) in files {
@@ -39,8 +35,7 @@ class WebFileManager: DownloaderDelegate {
             } catch {
                 print("Failed to delete local file: \(fileURL.lastPathComponent) - \(error.localizedDescription)")
             }
-        }
-    }
+        }}
 
     func downloadFiles(files: [URL: String], completion: @escaping () -> Void) {
         print( "Starting file downloads..." ) // Add this print statement
@@ -102,22 +97,17 @@ class WebFileManager: DownloaderDelegate {
         return documentsDirectory.appendingPathComponent(fileIdentifier)
     }
 
-
     func prepareWebView() -> URL? {
         print("Preparing WebView...")
-        guard let chatHTMLFileURL = URL(string: "https://americansjewelry.com/chat/chat.html") else { return nil }
+        guard let chatHTMLFileURL: URL = URL(string: "https://americansjewelry.com/chat/chat.html") else { return nil }
         return getLocalFileURL(for: chatHTMLFileURL)
     }
-
-
 
     func downloader(_ downloader: Downloader, didFinishDownloadingTo location: URL, for identifier: String) {
         // Handle the download completion
     }
 
-    func downloader(_ downloader: Downloader, didFailWithError error: Error, for identifier: String) {
-        // Handle the download failure
-    }
+    func downloader(_ downloader: Downloader, didFailWithError error: Error, for identifier: String) {} // Handle the download failure
 }
 
 extension WebFileManager: DownloadCallbackManagerDelegate {
