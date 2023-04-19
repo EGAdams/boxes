@@ -79,7 +79,7 @@ class WebFileManager: DownloaderDelegate {
                     _ = try String(contentsOf: localURL)
                     print("File content for \(identifier):")
                     // print the contents of the file
-                    print( String( data: data, encoding: .utf8 ) ?? "No data" )
+                    // print( String( data: data, encoding: .utf8 ) ?? "No data" )
                 } catch {
                     print("Error reading file content for \(identifier): \(error)")
                 }
