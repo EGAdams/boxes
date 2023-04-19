@@ -1,6 +1,3 @@
-//
-//
-//
 import UIKit
 import WebKit
 
@@ -30,10 +27,8 @@ class JavaScriptInterface: NSObject, WKScriptMessageHandler {
         javaScriptExecutor.bindDeviceFunctions()
 
         if !McbaConfiguration.sharedInstance().isJavascriptInitialized() {
-            McbaConfiguration.sharedInstance().javascriptInitialized = true
-        }
-        super.init()
-    }
+            McbaConfiguration.sharedInstance().javascriptInitialized = true }
+        super.init()}
 
     func userContentController( _ userContentController: WKUserContentController, didReceive message: WKScriptMessage ) {
         print("Message received: \( message.body )")

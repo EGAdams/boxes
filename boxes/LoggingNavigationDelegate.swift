@@ -22,6 +22,7 @@ class LoggingNavigationDelegate: NSObject, WKNavigationDelegate, WKScriptMessage
         }}
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        print( "inside userContentController in LoggingNavigationDelegate... message.name: \(message.name) " )
         if message.name == "jsLog" {
             print("JavaScript Log: \(message.body)")
         }}

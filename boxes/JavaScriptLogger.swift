@@ -11,6 +11,7 @@ class JavaScriptLogger: NSObject, WKScriptMessageHandler {
     override init() {  print( "    initializing JavaScriptLogger... " )}
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        print( "inside userContentController in JavaScriptLogger... message.name: \(message.name) " )     
         if message.name == "jsLog", let logMessage = message.body as? String {
             print("[JavaScript]: \(logMessage)")}}
 }

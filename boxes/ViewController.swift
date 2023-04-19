@@ -1,38 +1,25 @@
 import UIKit
 import WebKit
 
-/** @class ViewController */
-class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
+class ViewController: UIViewController, WKNavigationDelegate {
     var webView: WKWebView!
     private var javascriptBridge: WKUserContentController!
     private var javascriptInterface: JavaScriptInterface!
     private var loggingNavigationDelegate: LoggingNavigationDelegate!
-    
     private let webFileManager = WebFileManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print( "entering view did load in the view controller... " )
-
         let webConfiguration = WKWebViewConfiguration()
         webConfiguration.preferences.javaScriptCanOpenWindowsAutomatically = true
-        let contentController = WKUserContentController()
-        let errorLoggingScriptMessageHandler = ErrorLoggingScriptMessageHandler()
-        contentController.add(errorLoggingScriptMessageHandler, name: "errorLog")
-        webConfiguration.userContentController = contentController
-
         let filesToDownload: [URL: String] = [
             URL(string: "https://americansjewelry.com/chat/chat.html")!: "chatHTML",
             URL(string: "https://americansjewelry.com/chat/config.json")!: "configJSON",
             URL(string: "https://americansjewelry.com/chat/js/chat.js")!: "chatJS",
-            URL(string: "https://americansjewelry.com/chat/css/chat.css")!: "chatCSS"
-        ]
+            URL(string: "https://americansjewelry.com/chat/css/chat.css")!: "chatCSS" ]
         
-        print("Files to download: \(filesToDownload)")
-        
-        // Delete local files before downloading new ones
-        webFileManager.deleteLocalFiles(files: filesToDownload)
-
+        webFileManager.deleteLocalFiles( files: filesToDownload )
         webFileManager.downloadFiles(files: filesToDownload) { [weak self] in
             guard let self = self else { return }
             if let fileURL = self.webFileManager.prepareWebView() {
@@ -40,22 +27,13 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
                 self.setupWebView()
                 print( "loading file url: \(fileURL)... " )
                 self.webView.loadFileURL(fileURL, allowingReadAccessTo: fileURL.deletingLastPathComponent())
-            }
-        }
-        print( "finished view did load in the view controller... " )
-    }
-    
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if message.name == "jsLog" {
-            print("JavaScript Log: \(message.body)")
-        }
-    }
+            }}
+        print( "finished view did load in the view controller... " )}
     
     // Implement the required method of the JavaScriptInterfaceDelegate protocol
     func javascriptInterface( _ javascriptInterface: JavaScriptInterface, didReceiveMessage message: WKScriptMessage ) {
-        print( "Received message from JavaScript: \( message.body )" ) // Example: print the message body
-    }
-
+        print( "Received message from JavaScript: \( message.body )" )} // Example: print the message body
+    
     func setupWebView() {
         print( "setting up web view... " )
         let webConfiguration = WKWebViewConfiguration()
@@ -67,8 +45,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
             webView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
             webView.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor),
             webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
+            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor) ])
         
         let contentController = webView.configuration.userContentController
         let script = """
@@ -82,12 +59,12 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         let userScript = WKUserScript(source: script, injectionTime: .atDocumentStart, forMainFrameOnly: true)
         print( "    adding user script... " )
         contentController.addUserScript( userScript )
-        
         let javaScriptLogger = JavaScriptLogger()
         print( "    adding javascript logger... " )
-        contentController.add(javaScriptLogger, name: "jsLog")
-    }
-
+        contentController.add( javaScriptLogger, name: "jsLog")
+        let errorLoggingScriptMessageHandler = ErrorLoggingScriptMessageHandler()
+        print( "    adding error logging script message handler... " )
+        contentController.add( errorLoggingScriptMessageHandler, name: "errorLog" )}
 }
 
 
