@@ -15,11 +15,15 @@ class ViewController: UIViewController, WKNavigationDelegate {
         let webConfiguration = WKWebViewConfiguration()
         webConfiguration.preferences.javaScriptCanOpenWindowsAutomatically = true
         let filesToDownload: [URL: String] = [
-            URL( string: "https://americansjewelry.com/chat/chat.html" )!:    "chatHTML",
-            URL( string: "https://americansjewelry.com/chat/config.json" )!:  "configJSON",
-            URL( string: "https://americansjewelry.com/chat/js/chat.js" )!:   "chatJS",
-            URL( string: "https://americansjewelry.com/chat/css/chat.css" )!: "chatCSS" ]
-
+            URL( string: "https://americansjewelry.com/chat/chat.html"        )!: "chatHTML",
+            URL( string: "https://americansjewelry.com/chat/config.json"      )!: "configJSON",
+            URL( string: "https://americansjewelry.com/chat/js/chat.js"       )!: "chatJS",
+            URL( string: "https://americansjewelry.com/chat/js/init.js"       )!: "initJS",
+            URL( string: "https://americansjewelry.com/chat/js/mcba.js"       )!: "mcbaJS",
+            URL( string: "https://americansjewelry.com/chat/css/chat.css"     )!: "chatCSS",
+            URL( string: "https://americansjewelry.com/chat/js/template.json" )!: "templateJSON",
+        ]
+                                                                                                                          
         setupWebView()
 
         webFileManager.deleteLocalFiles( files: filesToDownload )
@@ -31,26 +35,26 @@ class ViewController: UIViewController, WKNavigationDelegate {
                 self.webView.loadFileURL( fileURL, allowingReadAccessTo: fileURL.deletingLastPathComponent())
             }
         }
+        javascriptInterface = JavaScriptInterface( webView: webView )
         print( "finished view did load in the view controller... " )
     }
 
-    // Implement the required method of the JavaScriptInterfaceDelegate protocol
+    // Implement the required method of the JavaScriptInterfaceDelegate protocol  // no messages for some reason
     func javascriptInterface( _ javascriptInterface: JavaScriptInterface, didReceiveMessage message: WKScriptMessage ) {
         print( "Received message from JavaScript: \( message.body )" )} // Example: print the message body
     
     func setupWebView() {
         print( "setting up web view... " )
         let webConfiguration = WKWebViewConfiguration()
-        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView = WKWebView( frame: .zero, configuration: webConfiguration )
         webView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(webView)
+        view.addSubview( webView )
 
         NSLayoutConstraint.activate([
-            webView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
-            webView.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor),
-            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+            webView.topAnchor.constraint(      equalTo: topLayoutGuide.bottomAnchor ),
+            webView.bottomAnchor.constraint(   equalTo: bottomLayoutGuide.topAnchor ),
+            webView.leadingAnchor.constraint(  equalTo: view.leadingAnchor          ),
+            webView.trailingAnchor.constraint( equalTo: view.trailingAnchor         )])
 
         let contentController = webView.configuration.userContentController
         let script = """

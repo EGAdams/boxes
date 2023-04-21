@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebViewManager Detailed Design</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            color: #5e9ca0;
+        }
+        h2 {
+            border-bottom: 2px solid #5e9ca0;
+        }
+        ul {
+            list-style-type: none;
+        }
+        ul li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>WebViewManager Detailed Design</h1>
+    <p>The WebViewManager class is responsible for creating and configuring the WKWebView, adding the webView to the parent view, setting up constraints, and injecting scripts.</p>
+<h2>1. Initialization</h2>
+<p>WebViewManager will be initialized with a reference to the parent UIViewController and the WKWebViewConfiguration.</p>
+<h3>Properties:</h3>
+<ul>
+    <li>parentViewController: UIViewController</li>
+    <li>webViewConfiguration: WKWebViewConfiguration</li>
+</ul>
+
+<h2>2. Create and configure WKWebView</h2>
+<p>WebViewManager will create a WKWebView instance using the provided configuration, set up the WKWebView's properties, and add the webView as a subview to the parent view controller's view.</p>
+<h3>Methods:</h3>
+<ul>
+    <li>createWebView(): WKWebView</li>
+</ul>
+
+<h2>3. Add webView to parent view and set up constraints</h2>
+<p>WebViewManager will add the created webView as a subview to the parent view controller's view and set up constraints.</p>
+<h3>Methods:</h3>
+<ul>
+    <li>addWebViewToParentView(webView: WKWebView)</li>
+</ul>
+
+<h2>4. Inject JavaScript scripts</h2>
+<p>WebViewManager will inject the required JavaScript scripts into the webView using the webView's userContentController. This includes adding user scripts and script message handlers.</p>
+<h3>Methods:</h3>
+<ul>
+    <li>injectJavaScriptScripts(webView: WKWebView)</li>
+</ul>
+
+<p>By implementing the WebViewManager, we can separate the concerns related to the webView's creation, configuration, and setup from the ViewController, adhering more closely to the SOLID principles.</p>
+</body>
+</html>

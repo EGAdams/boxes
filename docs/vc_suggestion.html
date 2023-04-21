@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refactoring Plan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            color: #5e9ca0;
+        }
+        h2 {
+            border-bottom: 2px solid #5e9ca0;
+        }
+        ul {
+            list-style-type: none;
+        }
+        ul li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Refactoring Plan for ViewController</h1>
+    <p>Here is the plan to break up the remaining parts of the ViewController into simpler objects:</p>
+    <h2>1. WebViewManager</h2>
+    <p>This class will handle the creation and setup of the WKWebView, including adding the view to the parent view, setting up constraints, and injecting scripts.</p>
+    <h3>Responsibilities:</h3>
+    <ul>
+        <li>Create and configure WKWebView</li>
+        <li>Add webView to parent view and set up constraints</li>
+        <li>Inject JavaScript scripts</li>
+    </ul>
+<h2>2. FileLoadingManager</h2>
+<p>This class will be responsible for handling the files to download and the loading of the files into the webView.</p>
+<h3>Responsibilities:</h3>
+<ul>
+    <li>Manage the files to download</li>
+    <li>Load files into webView after download</li>
+</ul>
+
+<h2>3. JavaScriptMessageHandler</h2>
+<p>This class will handle JavaScript messages received from the webView.</p>
+<h3>Responsibilities:</h3>
+<ul>
+    <li>Implement JavaScriptInterfaceDelegate protocol</li>
+    <li>Handle messages received from JavaScript</li>
+</ul>
+
+<p>By breaking up the ViewController into these separate objects, we can achieve better separation of concerns and adhere more closely to the SOLID principles.</p>
+</body>
+</html>
+
+
+

@@ -1,20 +1,15 @@
 //
 //  WebViewNavigationHandler.swift
-//  boxes
 //
 //  Created by Clay Ackerland on 4/15/23.
 //
-
 import Foundation
 import UIKit
 import WebKit
 
 class WebViewNavigationHandler {
     
-    // constructor
-    init() {
-        print( "initializing WebViewNavigationHandler... " )
-    }
+    init() { print( "initializing WebViewNavigationHandler... " ) }  // constructor
     
     func handleNavigation(for request: URLRequest) -> Bool {
         // let mainInstance = McbaConfiguration.sharedInstance()
@@ -26,13 +21,10 @@ class WebViewNavigationHandler {
                 topController = presentedViewController
             }
             // let requestString = request.url?.absoluteString
-
             // The same conditions from the original code
-
             // Examples:
             // if (requestString!.containsIgnoringCase(find: "chat")) { ... }
             // if (requestString!.containsIgnoringCase(find: "rewards")) { ... }
         }
-        return true
-    }
+        return true }
 }

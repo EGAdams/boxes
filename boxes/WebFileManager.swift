@@ -72,7 +72,7 @@ class WebFileManager: DownloaderDelegate {
 
             do {
                 try data.write(to: localURL)
-                // print("\(identifier) downloaded and saved to \(localURL)")
+                print("\(identifier) downloaded and saved to \(localURL)")
 
                 // Add these lines to print the content of the downloaded files
                 do {
