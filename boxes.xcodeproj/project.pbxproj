@@ -22,7 +22,6 @@
 		6F8A722829E8C4B900C4A9C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F8A722629E8C4B900C4A9C8 /* LaunchScreen.storyboard */; };
 		6F8A723329E8C4B900C4A9C8 /* boxesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A723229E8C4B900C4A9C8 /* boxesTests.swift */; };
 		6F8A723E29E8C4B900C4A9C8 /* boxesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A723D29E8C4B900C4A9C8 /* boxesUITests.swift */; };
-		6F8A724C29E8CBCB00C4A9C8 /* init.js in Resources */ = {isa = PBXBuildFile; fileRef = 6F8A724B29E8CBCB00C4A9C8 /* init.js */; };
 		6FB1555129ECBD4600E4E48E /* CompletionHandlerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1555029ECBD4600E4E48E /* CompletionHandlerManager.swift */; };
 		6FB1555329ECD04900E4E48E /* DownloadProgressTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1555229ECD04900E4E48E /* DownloadProgressTracker.swift */; };
 		6FB1555529ECD21400E4E48E /* FileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1555429ECD21400E4E48E /* FileHandler.swift */; };
@@ -72,7 +71,6 @@
 		6F8A723929E8C4B900C4A9C8 /* boxesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = boxesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8A723D29E8C4B900C4A9C8 /* boxesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = boxesUITests.swift; sourceTree = "<group>"; };
 		6F8A723F29E8C4B900C4A9C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6F8A724B29E8CBCB00C4A9C8 /* init.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = init.js; sourceTree = "<group>"; };
 		6FB1555029ECBD4600E4E48E /* CompletionHandlerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionHandlerManager.swift; sourceTree = "<group>"; };
 		6FB1555229ECD04900E4E48E /* DownloadProgressTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadProgressTracker.swift; sourceTree = "<group>"; };
 		6FB1555429ECD21400E4E48E /* FileHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandler.swift; sourceTree = "<group>"; };
@@ -138,7 +136,6 @@
 				6F8A722429E8C4B900C4A9C8 /* Assets.xcassets */,
 				6F8A722629E8C4B900C4A9C8 /* LaunchScreen.storyboard */,
 				6F8A722929E8C4B900C4A9C8 /* Info.plist */,
-				6F8A724B29E8CBCB00C4A9C8 /* init.js */,
 				6F484CFF29EA0D0E002F426A /* JavascriptInterface.swift */,
 				6F1A140029ECAFED005ED718 /* Downloader.swift */,
 				6FB5E72329EB22DE0044E963 /* WebViewNavigationHandler.swift */,
@@ -282,7 +279,6 @@
 				6F8A722829E8C4B900C4A9C8 /* LaunchScreen.storyboard in Resources */,
 				6F484D0829EA3B7C002F426A /* buttons.html in Resources */,
 				6F8A722529E8C4B900C4A9C8 /* Assets.xcassets in Resources */,
-				6F8A724C29E8CBCB00C4A9C8 /* init.js in Resources */,
 				6F8A722329E8C4B900C4A9C8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -431,7 +427,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -487,7 +483,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -506,6 +502,7 @@
 				DEVELOPMENT_TEAM = 949DZ474G2;
 				INFOPLIST_FILE = boxes/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -526,6 +523,7 @@
 				DEVELOPMENT_TEAM = 949DZ474G2;
 				INFOPLIST_FILE = boxes/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

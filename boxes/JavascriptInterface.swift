@@ -36,7 +36,12 @@ class JavaScriptInterface: NSObject, WKScriptMessageHandler {
             guard let urlString = message.body as? String,
                   let url = URL( string: urlString ) else { return }
             let request = URLRequest( url: url )
-            requestParser.parseRequest( request, with: self )}}
+            requestParser.parseRequest( request, with: self )
+            
+        } else if message.name == "errorLog", let errorMessage = message.body as? String {
+            print( "[Javascript]: \(errorMessage)")
+        }
+    }
     
     func setMcbaReadyCallback( _ callback: McbaReadyCallback! ) {
         if McbaConfiguration.sharedInstance().isMcbaReady() {

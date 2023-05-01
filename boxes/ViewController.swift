@@ -15,13 +15,13 @@ class ViewController: UIViewController, WKNavigationDelegate {
         let webConfiguration = WKWebViewConfiguration()
         webConfiguration.preferences.javaScriptCanOpenWindowsAutomatically = true
         let filesToDownload: [URL: String] = [
-            URL( string: "https://americansjewelry.com/chat/chat.html"        )!: "chatHTML",
-            URL( string: "https://americansjewelry.com/chat/config.json"      )!: "configJSON",
-            URL( string: "https://americansjewelry.com/chat/js/chat.js"       )!: "chatJS",
-            URL( string: "https://americansjewelry.com/chat/js/init.js"       )!: "initJS",
-            URL( string: "https://americansjewelry.com/chat/js/mcba.js"       )!: "mcbaJS",
-            URL( string: "https://americansjewelry.com/chat/css/chat.css"     )!: "chatCSS",
-            URL( string: "https://americansjewelry.com/chat/js/template.json" )!: "templateJSON",
+            URL( string: "https://americansjewelry.com/chat/chat.html"            )!: "chatHTML",
+            URL( string: "https://americansjewelry.com/chat/config.json"          )!: "configJSON",
+            URL( string: "https://americansjewelry.com/chat/js/chat.js"           )!: "chatJS",
+            URL( string: "https://americansjewelry.com/chat/js/initialization.js" )!: "initializationJS",
+            URL( string: "https://americansjewelry.com/chat/js/mcba.js"           )!: "mcbaJS",
+            URL( string: "https://americansjewelry.com/chat/css/chat.css"         )!: "chatCSS",
+            URL( string: "https://americansjewelry.com/chat/js/template.json"     )!: "templateJSON",
         ]
                                                                                                                           
         setupWebView()
